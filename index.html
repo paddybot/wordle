@@ -210,91 +210,152 @@ body.monkey .toast {
   display: none;
   flex-shrink: 0;
   text-align: center;
-  padding: 2px 0 0;
+  padding: 0;
   position: relative;
-  height: 70px;
+  height: 56px;
+  z-index: 50;
 }
 body.monkey #mascot-area { display: block; }
 
 #mascot {
-  font-size: 52px;
+  font-size: 48px;
   display: inline-block;
-  animation: mascotIdle 3s ease-in-out infinite;
+  animation: mascotIdle 2s ease-in-out infinite;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   position: relative;
   transition: transform 0.3s;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.5));
 }
-#mascot:active { transform: scale(1.3) !important; }
+#mascot:active { transform: scale(1.5) !important; }
 
 @keyframes mascotIdle {
-  0%, 100% { transform: translateY(0) rotate(-2deg); }
-  25% { transform: translateY(-4px) rotate(2deg); }
-  50% { transform: translateY(-2px) rotate(-1deg); }
-  75% { transform: translateY(-5px) rotate(3deg); }
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  25% { transform: translateY(-6px) rotate(4deg); }
+  50% { transform: translateY(-2px) rotate(-2deg); }
+  75% { transform: translateY(-8px) rotate(5deg); }
 }
 @keyframes mascotExcited {
-  0%, 100% { transform: translateY(0) scale(1); }
-  20% { transform: translateY(-12px) scale(1.15) rotate(-8deg); }
-  40% { transform: translateY(-8px) scale(1.1) rotate(8deg); }
-  60% { transform: translateY(-15px) scale(1.2) rotate(-5deg); }
-  80% { transform: translateY(-5px) scale(1.05) rotate(3deg); }
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.3) rotate(-10deg); }
+  30% { transform: scale(1.2) rotate(12deg); }
+  45% { transform: scale(1.4) rotate(-8deg); }
+  60% { transform: scale(1.1) rotate(6deg); }
 }
 @keyframes mascotWorried {
-  0%, 100% { transform: translateX(0); }
-  20% { transform: translateX(-5px) rotate(-3deg); }
-  40% { transform: translateX(5px) rotate(3deg); }
-  60% { transform: translateX(-3px) rotate(-2deg); }
-  80% { transform: translateX(3px) rotate(2deg); }
+  0%, 100% { transform: translateX(0) scale(1); }
+  15% { transform: translateX(-12px) rotate(-8deg) scale(1.1); }
+  30% { transform: translateX(12px) rotate(8deg) scale(1.15); }
+  45% { transform: translateX(-8px) rotate(-5deg) scale(1.1); }
+  60% { transform: translateX(8px) rotate(5deg) scale(1.05); }
 }
 @keyframes mascotWin {
   0% { transform: scale(1) rotate(0); }
-  15% { transform: scale(1.4) rotate(-15deg) translateY(-10px); }
-  30% { transform: scale(1.3) rotate(15deg) translateY(-20px); }
-  45% { transform: scale(1.5) rotate(-10deg) translateY(-15px); }
-  60% { transform: scale(1.3) rotate(10deg) translateY(-25px); }
-  80% { transform: scale(1.2) rotate(-5deg) translateY(-10px); }
+  10% { transform: scale(1.8) rotate(-20deg) translateY(-20px); }
+  25% { transform: scale(1.6) rotate(25deg) translateY(-30px); }
+  40% { transform: scale(2.0) rotate(-15deg) translateY(-20px); }
+  55% { transform: scale(1.7) rotate(20deg) translateY(-35px); }
+  70% { transform: scale(1.5) rotate(-10deg) translateY(-15px); }
+  85% { transform: scale(1.3) rotate(5deg) translateY(-5px); }
   100% { transform: scale(1) rotate(0) translateY(0); }
 }
 @keyframes mascotLose {
-  0%, 100% { transform: rotate(0) translateY(0); }
-  30% { transform: rotate(-5deg) translateY(3px); }
-  60% { transform: rotate(5deg) translateY(5px); }
+  0%, 100% { transform: rotate(0) translateY(0) scale(1); }
+  20% { transform: rotate(-8deg) translateY(4px) scale(1.1); }
+  50% { transform: rotate(8deg) translateY(6px) scale(1.15); }
+  80% { transform: rotate(-5deg) translateY(3px) scale(1.05); }
+}
+@keyframes mascotIntrude {
+  0% { transform: scale(1) translateY(0); }
+  20% { transform: scale(2.5) translateY(40px); }
+  40% { transform: scale(2.2) translateY(35px) rotate(10deg); }
+  60% { transform: scale(2.5) translateY(40px) rotate(-10deg); }
+  80% { transform: scale(1.5) translateY(15px); }
+  100% { transform: scale(1) translateY(0); }
 }
 #mascot.excited { animation: mascotExcited 0.8s ease !important; }
-#mascot.worried { animation: mascotWorried 0.5s ease !important; }
-#mascot.win { animation: mascotWin 1.5s ease !important; }
-#mascot.lose { animation: mascotLose 2s ease-in-out infinite !important; }
+#mascot.worried { animation: mascotWorried 0.6s ease !important; }
+#mascot.win { animation: mascotWin 2s ease !important; }
+#mascot.lose { animation: mascotLose 2.5s ease-in-out infinite !important; }
+#mascot.intrude { animation: mascotIntrude 2s ease !important; z-index: 999; }
 
-/* Speech bubble */
+/* Speech bubble - BIGGER and more obnoxious */
 #speech-bubble {
   position: absolute;
-  top: -8px;
+  top: -12px;
   left: 50%;
-  transform: translateX(30px);
-  background: rgba(255,255,255,0.95);
-  color: #3a3020;
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 13px;
-  font-weight: 600;
+  transform: translateX(25px);
+  background: #ffee00;
+  color: #1a1000;
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 14px;
+  font-weight: 700;
   white-space: nowrap;
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.2s;
   pointer-events: none;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 3px 12px rgba(0,0,0,0.4);
+  border: 2px solid #e8a000;
+  max-width: 240px;
+  white-space: normal;
+  text-align: center;
+  z-index: 999;
 }
-#speech-bubble.show { opacity: 1; }
+#speech-bubble.show { opacity: 1; animation: bubblePop 0.3s ease; }
+@keyframes bubblePop {
+  0% { transform: translateX(25px) scale(0); }
+  50% { transform: translateX(25px) scale(1.15); }
+  100% { transform: translateX(25px) scale(1); }
+}
 #speech-bubble::after {
   content: '';
   position: absolute;
-  bottom: -6px;
+  bottom: -8px;
   left: 15px;
   width: 0;
   height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 8px solid rgba(255,255,255,0.95);
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid #ffee00;
+}
+
+/* Slot machine glow effect on tiles */
+body.monkey .tile.reveal {
+  animation: slotReveal 0.5s ease forwards !important;
+}
+@keyframes slotReveal {
+  0% { transform: rotateX(0) scale(1); box-shadow: none; }
+  30% { transform: rotateX(90deg) scale(1.05); }
+  50% { transform: rotateX(90deg) scale(1.05); box-shadow: 0 0 20px rgba(232,168,0,0.6); }
+  100% { transform: rotateX(0) scale(1); box-shadow: 0 0 8px rgba(232,168,0,0.3); }
+}
+
+/* Neon glow on correct tiles */
+body.monkey .tile.correct {
+  box-shadow: 0 0 12px rgba(232,104,32,0.6), 0 0 24px rgba(232,104,32,0.3) !important;
+}
+body.monkey .tile.present {
+  box-shadow: 0 0 10px rgba(240,200,48,0.5), 0 0 20px rgba(240,200,48,0.2) !important;
+}
+
+/* Screen flash on all-correct */
+@keyframes screenFlash {
+  0% { opacity: 0; }
+  20% { opacity: 0.3; }
+  100% { opacity: 0; }
+}
+#screen-flash {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,238,0,0.4), rgba(232,104,32,0.2));
+  z-index: 250;
+  pointer-events: none;
+}
+#screen-flash.active {
+  display: block;
+  animation: screenFlash 1s ease forwards;
 }
 
 /* Vine decorations */
@@ -683,6 +744,7 @@ header h1 {
 <body>
 <div id="jungle-bg"></div>
 <div id="confetti"></div>
+<div id="screen-flash"></div>
 <div id="app">
   <header>
     <button id="monkey-btn" onclick="toggleMonkeyTheme()" title="Monkey Mode">🐵</button>
@@ -1541,8 +1603,10 @@ function toggleMonkeyTheme() {
   saveSettings(settings);
   if (isMonkey) {
     startJungleBackground();
+    startMonkeyIntrusions();
   } else {
     stopJungleBackground();
+    stopMonkeyIntrusions();
   }
 }
 
@@ -1554,6 +1618,7 @@ function loadMonkeyTheme() {
     document.getElementById('title-text').innerHTML = 'Monkle';
     document.title = '🐵 Monkle';
     startJungleBackground();
+    startMonkeyIntrusions();
   }
 }
 
@@ -1610,39 +1675,139 @@ function launchConfetti() {
 // ─── Fun monkey toast messages ───
 function getMonkeyWinMessage(row) {
   const msgs = [
-    '🍌 BANANA GENIUS! 🍌',
-    '🐒 OOH OOH AAH AAH! 🐒',
-    '🌟 JUNGLE KING! 🌟',
-    '🎉 MONKEY MAGIC! 🎉',
-    '🥳 TOP BANANA! 🥳',
-    '🐵 PHEW-EEEE! 🐵'
+    '🍌 OK FINE. Genius. Whatever. 🍌',
+    '🐒 Took you long enough!! 🐒',
+    '🌟 Not bad for a HUMAN 🌟',
+    '🎉 I guess even YOU get lucky 🎉',
+    "🥳 5 guesses?! I'd have got it in 2 🥳",
+    '🐵 SIX?! That was PAINFUL to watch 🐵'
   ];
   return msgs[row] || msgs[msgs.length - 1];
 }
 function getMonkeyLoseMessage() {
-  const msgs = ['🙈 Oops! The monkey hid the word!', '🐒 Even monkeys miss sometimes!', '🍌 Slipped on that one!'];
+  const msgs = [
+    '💀 HAHAHA YOU LOST 💀',
+    '🙈 I literally CANNOT with you right now',
+    '🍌 Game over! Brain also over apparently!',
+    '💀 Tragic. Just absolutely tragic.',
+    '🐵 My work here is done. YOURS isn\'t though.',
+  ];
   return msgs[Math.floor(Math.random() * msgs.length)];
 }
 
 // ─── Mascot reactions ───
 const MASCOT_FACES = {
   idle: '🐵',
-  thinking: '🤔',
+  thinking: '🤨',
   excited: '🙊',
-  happy: '😄',
-  worried: '😬',
+  happy: '😏',
+  worried: '😤',
   win: '🥳',
-  lose: '🙈',
-  poke: '🙉'
+  lose: '💀',
+  poke: '🙉',
+  intrude: '🐵',
+  typing: '👀'
 };
 const SPEECH = {
-  idle: ['Ooh ooh!', 'Pick a word!', '🍌?', 'I believe in you!', '*scratches head*', 'Eee eee!'],
-  correct: ['YES! 🍌', 'Ooh ooh ooh!', 'BANANA!', 'So smart!', 'Eee! 🎉', 'You got this!'],
-  present: ['Close! 🐒', 'Almost!', 'Ooh interesting...', 'Getting warmer!', 'Try again!'],
-  absent: ['Hmm...', 'Nope!', 'Not that one', '*covers eyes*', 'Uh oh...', 'Try something else!'],
-  win: ['🍌🍌🍌 BANANA PARTY! 🍌🍌🍌', 'YOU DID IT! OOH OOH!', 'AMAZING HUMAN!', 'JUNGLE CHAMPION! 🏆'],
-  lose: ['Aww... 🙈', 'The word was sneaky!', 'Next time!', 'Even monkeys fall off trees!'],
-  poke: ['Hehe! 🐒', 'Stop it! 😂', 'That tickles!', 'Ooh! Do it again!', '*giggles*', "I'm helping! 🍌", 'Eee hee hee!']
+  idle: [
+    "Hurry up I'm BORED 🍌",
+    "Today would be nice...",
+    "My grandma types faster",
+    "*aggressive banana eating*",
+    "I've seen SLUGS move quicker",
+    "HELLO?? Anyone home??",
+    "I could solve this blindfolded",
+    "*tapping foot impatiently*",
+    "Pick a word. ANY word. PLEASE.",
+  ],
+  correct: [
+    "Oh wow you CAN spell! 🍌",
+    "Finally!! Was that so hard?",
+    "Even a broken clock...",
+    "Don't let it go to your head",
+    "OK fine that was decent",
+    "Lucky guess tbh",
+    "I literally told you that one",
+    "See what happens when you LISTEN?",
+  ],
+  present: [
+    "WRONG SPOT genius 🙄",
+    "Close but no banana",
+    "Warm... like your brain apparently",
+    "Right letter, wrong place. Story of your life?",
+    "Sooooo close. NOT.",
+    "You're like a GPS with a delay",
+    "Almost! ...is what I say to be nice",
+  ],
+  absent: [
+    "HAHAHA what was THAT?! 😂",
+    "Did you just GUESS randomly??",
+    "My pet rock could do better",
+    "That word doesn't even SMELL right",
+    "Are you even trying?? 💀",
+    "I'm embarrassed FOR you",
+    "Delete your brain and try again",
+    "Wow. Just... wow. 🤦",
+    "You kiss your mother with that vocabulary?",
+    "I've seen better guesses from a GOLDFISH",
+    "Was that a word or a cry for help?",
+    "CATASTROPHIC. Love it. Try again.",
+  ],
+  mostlyAbsent: [
+    "BRUH 💀💀💀",
+    "That was PAINFUL to watch",
+    "I need therapy after that guess",
+    "The word is hiding FROM you at this point",
+    "Are we playing the same game??",
+    "That guess just called and wants an apology",
+  ],
+  win: [
+    "FINE you win. Whatever. 🙄🍌",
+    "OK I'll admit that was... acceptable",
+    "Don't celebrate. I LET you win.",
+    "Even I'M impressed. And I'm NEVER impressed.",
+    "🍌 BANANA PARTY! (you're still not invited)",
+    "FINALLY. I was about to do it for you.",
+    "The crowd goes mild! 👏",
+    "Winner winner banana dinner!",
+  ],
+  lose: [
+    "HAHAHAHA YOU LOST 💀💀💀",
+    "I KNEW IT. I called it from guess 1.",
+    "Tragic. Absolutely tragic.",
+    "Imagine having a BRAIN and still losing",
+    "I'm not mad, just disappointed. JK I'm HOWLING 😂",
+    "Pack it up. Go home. Touch grass.",
+    "The word was RIGHT THERE. Unbelievable.",
+    "My 3-year-old cousin could've got that",
+  ],
+  poke: [
+    "OW! What's your PROBLEM?! 😤",
+    "Touch me again and I throw a banana",
+    "RUDE. I'm trying to JUDGE you here",
+    "Stop poking and start PLAYING",
+    "DO I COME TO YOUR HOUSE AND POKE YOU??",
+    "That's ASSAULT. I'm calling the jungle police.",
+    "You poke me ONE more time...",
+    "*bites finger* 🐒",
+  ],
+  typing: [
+    "Ooh what are you typing... 👀",
+    "This better be good...",
+    "I can already tell this is wrong",
+    "Hmm interesting choice... PSYCHE",
+    "Bold strategy, let's see how it works out",
+    "*judging intensifies*",
+    "I wouldn't play that but OK",
+    "Are you sure about that? Really?",
+  ],
+  intrude: [
+    "HEY! PAY ATTENTION TO ME! 🐵",
+    "Remember: I'M the star here, not you",
+    "Did you miss me?? I'm BACK",
+    "Quick monkey break! 🍌🍌🍌",
+    "*jumps on screen* WHEEEEE!",
+  ]
 };
 
 function setMascot(face, speechCategory, animClass, duration) {
@@ -1650,35 +1815,60 @@ function setMascot(face, speechCategory, animClass, duration) {
   const mascot = document.getElementById('mascot');
   const bubble = document.getElementById('speech-bubble');
 
-  // Set face
   mascot.childNodes[0].textContent = MASCOT_FACES[face] || MASCOT_FACES.idle;
 
-  // Animation
   mascot.className = '';
   if (animClass) {
-    void mascot.offsetWidth; // force reflow
+    void mascot.offsetWidth;
     mascot.classList.add(animClass);
   }
 
-  // Speech bubble
   if (speechCategory && SPEECH[speechCategory]) {
     const msgs = SPEECH[speechCategory];
     bubble.textContent = msgs[Math.floor(Math.random() * msgs.length)];
     bubble.classList.add('show');
-    setTimeout(() => bubble.classList.remove('show'), duration || 2500);
+    setTimeout(() => bubble.classList.remove('show'), duration || 3000);
   }
 
-  // Reset to idle after animation
   if (face !== 'idle' && face !== 'lose') {
     setTimeout(() => {
       mascot.childNodes[0].textContent = MASCOT_FACES.idle;
       mascot.className = '';
-    }, duration || 2500);
+    }, duration || 3000);
   }
 }
 
 function pokeMascot() {
-  setMascot('poke', 'poke', 'excited', 1500);
+  setMascot('poke', 'poke', 'worried', 2000);
+}
+
+// Random monkey intrusion while playing
+let intrudeTimer = null;
+function startMonkeyIntrusions() {
+  if (intrudeTimer) return;
+  function scheduleIntrude() {
+    const delay = 15000 + Math.random() * 30000; // 15-45s
+    intrudeTimer = setTimeout(() => {
+      if (!gameOver && document.body.classList.contains('monkey')) {
+        // 50% chance of typing comment, 50% chance of full intrusion
+        if (Math.random() < 0.5) {
+          setMascot('typing', 'typing', null, 3000);
+        } else {
+          setMascot('intrude', 'intrude', 'intrude', 3000);
+        }
+        // Occasional idle trash talk
+        setTimeout(() => {
+          if (!gameOver) setMascot('idle', 'idle', null, 2500);
+        }, 4000);
+      }
+      scheduleIntrude();
+    }, delay);
+  }
+  scheduleIntrude();
+}
+
+function stopMonkeyIntrusions() {
+  if (intrudeTimer) { clearTimeout(intrudeTimer); intrudeTimer = null; }
 }
 
 function mascotReactToGuess(result) {
@@ -1688,14 +1878,23 @@ function mascotReactToGuess(result) {
 
   if (correctCount === 5) {
     setMascot('win', 'win', 'win', 5000);
+    // Screen flash
+    const flash = document.getElementById('screen-flash');
+    flash.classList.remove('active');
+    void flash.offsetWidth;
+    flash.classList.add('active');
+    setTimeout(() => flash.classList.remove('active'), 1500);
   } else if (correctCount >= 3) {
-    setMascot('excited', 'correct', 'excited', 2000);
+    setMascot('happy', 'correct', 'excited', 3000);
   } else if (correctCount + presentCount >= 3) {
-    setMascot('happy', 'present', 'excited', 2000);
+    setMascot('thinking', 'present', 'excited', 3000);
   } else if (correctCount + presentCount === 0) {
-    setMascot('worried', 'absent', 'worried', 2000);
+    // Full roast mode for all-wrong
+    setMascot('worried', 'mostlyAbsent', 'intrude', 3500);
+  } else if (presentCount > 0 && correctCount === 0) {
+    setMascot('thinking', 'present', 'worried', 2500);
   } else {
-    setMascot('thinking', 'present', null, 2000);
+    setMascot('worried', 'absent', 'worried', 2500);
   }
 }
 
