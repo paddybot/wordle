@@ -112,14 +112,18 @@ header h1 {
   align-items: center;
   overflow: hidden;
   padding: 10px 0;
+  min-height: 0; /* allow flex shrinking */
 }
 #board {
   display: grid;
   grid-template-rows: repeat(6, 1fr);
   gap: 5px;
-  width: min(330px, 55vw);
-  height: min(396px, 66vw);
+  /* Size based on tile width: 5 tiles + 4 gaps */
+  --tile-size: min(58px, 12vw);
+  width: calc(var(--tile-size) * 5 + 5px * 4);
+  height: calc(var(--tile-size) * 6 + 5px * 5);
   max-height: 100%;
+  max-width: 100%;
 }
 .row {
   display: grid;
@@ -135,7 +139,6 @@ header h1 {
   text-transform: uppercase;
   border: 2px solid var(--tile-border);
   background: var(--tile-bg);
-  aspect-ratio: 1;
   transition: transform 0.1s;
 }
 .tile.filled { border-color: #565758; animation: pop 0.1s ease; }
