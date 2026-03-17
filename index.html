@@ -294,42 +294,68 @@ header h1 {
 .toggle input:checked + .slider::before { transform: translateX(18px); }
 .toggle input:disabled + .slider { opacity: 0.5; cursor: not-allowed; }
 
-/* Date picker */
-#date-picker-row { position: relative; }
-#date-input {
-  background: var(--dark-grey);
-  color: var(--text);
-  border: 1px solid #555;
-  border-radius: 6px;
+/* Date nav bar */
+#date-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   padding: 8px 12px;
-  font-size: 14px;
-  font-family: inherit;
-  cursor: pointer;
-  -webkit-appearance: none;
-  color-scheme: dark;
+  border-bottom: 1px solid var(--dark-grey);
+  flex-shrink: 0;
 }
-#date-input::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
-#today-btn {
+#date-nav .nav-arrow {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 4px;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s;
+}
+#date-nav .nav-arrow:hover { background: var(--dark-grey); }
+#date-nav .nav-arrow:disabled { opacity: 0.25; cursor: default; }
+#date-nav .nav-arrow:disabled:hover { background: none; }
+#date-label {
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: background 0.15s;
+  position: relative;
+  min-width: 160px;
+  text-align: center;
+}
+#date-label:hover { background: var(--dark-grey); }
+#date-label .day-num {
+  font-size: 11px;
+  color: #888;
+  font-weight: 400;
+  margin-left: 6px;
+}
+#date-hidden-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+#today-nav-btn {
   background: var(--green);
   color: white;
   border: none;
-  border-radius: 6px;
-  padding: 8px 14px;
-  font-size: 13px;
+  border-radius: 14px;
+  padding: 4px 12px;
+  font-size: 12px;
   font-weight: 700;
   cursor: pointer;
-  margin-left: 8px;
   display: none;
+  -webkit-tap-highlight-color: transparent;
 }
-#today-btn.show { display: inline-block; }
-#date-subtitle {
-  font-size: 12px;
-  color: var(--green);
-  text-align: center;
-  padding: 4px 0 0;
-  display: none;
-}
-#date-subtitle.show { display: block; }
+#today-nav-btn.show { display: block; }
 
 /* History section in stats */
 #history-section { margin-top: 16px; border-top: 1px solid var(--dark-grey); padding-top: 12px; }
@@ -361,7 +387,16 @@ header h1 {
     <h1>Wordle</h1>
     <button id="settings-btn" onclick="openSettings()">⚙️</button>
   </header>
-  <div id="date-subtitle"></div>
+  <nav id="date-nav">
+    <button class="nav-arrow" id="prev-day" onclick="stepDate(-1)">◀</button>
+    <span id="date-label" onclick="openDatePicker()">
+      <span id="date-text">Today</span>
+      <span class="day-num" id="date-day-num"></span>
+      <input type="date" id="date-hidden-input" onchange="changeDate(this.value)">
+    </span>
+    <button class="nav-arrow" id="next-day" onclick="stepDate(1)">▶</button>
+    <button id="today-nav-btn" onclick="backToToday()">Today</button>
+  </nav>
   <div id="toast-container"></div>
   <div id="board-container"><div id="board"></div></div>
   <div id="keyboard"></div>
@@ -401,16 +436,6 @@ header h1 {
         <input type="checkbox" id="hard-mode-toggle" onchange="toggleHardMode(this.checked)">
         <span class="slider"></span>
       </label>
-    </div>
-    <div class="setting-row" id="date-picker-row">
-      <div class="setting-info">
-        <div class="setting-name">Play a Date</div>
-        <div class="setting-desc">Pick any past date to play that day's puzzle</div>
-      </div>
-      <div>
-        <input type="date" id="date-input" onchange="changeDate(this.value)">
-        <button id="today-btn" onclick="backToToday()">Today</button>
-      </div>
     </div>
     <div class="setting-row">
       <div class="setting-info">
@@ -938,12 +963,59 @@ function openSettings() {
   const dayNum = entry ? entry.day : getDayNumber();
   document.getElementById('day-number-label').textContent = `Wordle #${dayNum}`;
   document.getElementById('hard-mode-toggle').checked = hardMode;
-  document.getElementById('date-input').value = ds;
-  document.getElementById('date-input').max = getTodayDateStr();
-  document.getElementById('date-input').min = '2021-06-19';
-  document.getElementById('today-btn').classList.toggle('show', !!selectedDate);
   updateHardModeToggle();
   document.getElementById('settings-modal').classList.add('show');
+}
+
+// ─── Date nav bar ───
+function updateDateNav() {
+  const ds = getActiveDateStr();
+  const todayStr = getTodayDateStr();
+  const isToday = ds === todayStr;
+
+  // Format date label
+  const d = new Date(ds + 'T12:00:00');
+  const dateText = isToday ? 'Today' : d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+  document.getElementById('date-text').textContent = dateText;
+
+  // Day number
+  const entry = (NYT_WORDS && NYT_WORDS[ds]) || (historyData && historyData[ds]);
+  const dayNum = entry ? entry.day : getDayNumber();
+  document.getElementById('date-day-num').textContent = `#${dayNum}`;
+
+  // Today button visibility
+  document.getElementById('today-nav-btn').classList.toggle('show', !isToday);
+
+  // Disable forward arrow if at today
+  document.getElementById('next-day').disabled = isToday;
+
+  // Hidden input config
+  const inp = document.getElementById('date-hidden-input');
+  inp.value = ds;
+  inp.max = todayStr;
+  inp.min = '2024-03-17';
+}
+
+function openDatePicker() {
+  const inp = document.getElementById('date-hidden-input');
+  inp.showPicker ? inp.showPicker() : inp.click();
+}
+
+function stepDate(delta) {
+  const ds = getActiveDateStr();
+  const d = new Date(ds + 'T12:00:00');
+  d.setDate(d.getDate() + delta);
+  const newDs = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+
+  // Don't go beyond today
+  if (newDs > getTodayDateStr()) return;
+  // Don't go before earliest data
+  if (newDs < '2024-03-17') {
+    showToast('No puzzle data before March 2024', 1500);
+    return;
+  }
+
+  changeDate(newDs);
 }
 
 // ─── Date switching ───
@@ -954,7 +1026,6 @@ function changeDate(dateStr) {
     backToToday();
     return;
   }
-  // Check if we have the word for this date
   const word = getWordForDate(dateStr);
   if (!word) {
     showToast('No puzzle available for this date', 2000);
@@ -964,16 +1035,11 @@ function changeDate(dateStr) {
   resetGameState();
   targetWord = word;
 
-  // Show date subtitle
-  const sub = document.getElementById('date-subtitle');
-  const d = new Date(dateStr + 'T12:00:00');
-  sub.textContent = d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
-  sub.classList.add('show');
-  document.getElementById('today-btn').classList.add('show');
-
   buildBoard();
   buildKeyboard();
   restoreSavedGame();
+  updateDateNav();
+  // Close settings if open
   document.getElementById('settings-modal').classList.remove('show');
 }
 
@@ -983,12 +1049,10 @@ function backToToday() {
   const word = getWordForDate(getTodayDateStr());
   targetWord = word || getDailyWordFallback();
 
-  document.getElementById('date-subtitle').classList.remove('show');
-  document.getElementById('today-btn').classList.remove('show');
-
   buildBoard();
   buildKeyboard();
   restoreSavedGame();
+  updateDateNav();
   document.getElementById('settings-modal').classList.remove('show');
 }
 
@@ -1087,6 +1151,7 @@ async function init() {
   document.getElementById('hard-mode-toggle').checked = hardMode;
 
   restoreSavedGame();
+  updateDateNav();
 }
 
 init();
