@@ -341,11 +341,14 @@ header h1 {
   margin-left: 6px;
 }
 #date-hidden-input {
-  position: absolute;
+  position: fixed;
+  top: -100px;
+  left: -100px;
   opacity: 0;
-  width: 0;
-  height: 0;
+  width: 1px;
+  height: 1px;
   pointer-events: none;
+  z-index: -1;
 }
 #today-nav-btn {
   background: var(--green);
@@ -396,8 +399,8 @@ header h1 {
     <span id="date-label" onclick="openDatePicker()">
       <span id="date-text">Today</span>
       <span class="day-num" id="date-day-num"></span>
-      <input type="date" id="date-hidden-input" onchange="changeDate(this.value)">
     </span>
+    <input type="date" id="date-hidden-input" onchange="handleDateInput(this.value)">
     <button class="nav-arrow" id="next-day" onclick="stepDate(1)">▶</button>
     <button id="today-nav-btn" onclick="backToToday()">Today</button>
   </nav>
@@ -1056,9 +1059,23 @@ function updateDateNav() {
   inp.min = '2024-03-17';
 }
 
+let datePickerOpen = false;
+
 function openDatePicker() {
   const inp = document.getElementById('date-hidden-input');
-  inp.showPicker ? inp.showPicker() : inp.click();
+  datePickerOpen = true;
+  if (inp.showPicker) {
+    inp.showPicker();
+  } else {
+    inp.focus();
+    inp.click();
+  }
+}
+
+function handleDateInput(value) {
+  if (!datePickerOpen) return; // ignore accidental triggers
+  datePickerOpen = false;
+  if (value) changeDate(value);
 }
 
 function stepDate(delta) {
