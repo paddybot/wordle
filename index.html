@@ -216,6 +216,17 @@ body.monkey .toast {
   z-index: 50;
 }
 body.monkey #mascot-area { display: block; }
+#clue-btn {
+  display: none; position: absolute; right: -60px; top: 10px;
+  background: #FFD700; border: 2px solid #FF8C00; border-radius: 20px;
+  padding: 4px 10px; font-size: 14px; font-weight: bold; cursor: pointer;
+  font-family: 'Fredoka', sans-serif; color: #333; box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  transition: transform 0.2s, background 0.2s;
+}
+#clue-btn:hover { transform: scale(1.1); background: #FFE44D; }
+#clue-btn:active { transform: scale(0.95); }
+#clue-btn.used { background: #999; border-color: #666; color: #ccc; }
+body.monkey #clue-btn { display: block; }
 
 #mascot {
   font-size: 48px;
@@ -929,6 +940,7 @@ header h1 {
     <div id="mascot" onclick="pokeMascot()">🐵
       <div id="speech-bubble"></div>
     </div>
+    <button id="clue-btn" onclick="giveClue(); this.blur()">🍌 Clue</button>
   </div>
   <div id="board-container"><div id="board"></div></div>
   <div id="rolling-container">
@@ -1714,6 +1726,7 @@ function resetGameState() {
   gameOver = false;
   boardState = [];
   letterStates = {};
+  clueLevel = 0;
 }
 
 function restoreSavedGame() {
@@ -2035,6 +2048,80 @@ function pokeMascot() {
   setMascot('poke', 'poke', 'worried', 2000);
 }
 
+let clueLevel = 0; // resets each game
+function giveClue() {
+  if (gameOver) {
+    setMascot('poke', null, 'worried', 2000);
+    showSpeech("Game's over genius. The answer is RIGHT THERE. 🙄", 3000);
+    return;
+  }
+  clueLevel++;
+  const word = targetWord;
+  const mascot = document.getElementById('mascot');
+  const bubble = document.getElementById('speech-bubble');
+
+  let clueText = '';
+  if (clueLevel === 1) {
+    // Clue 1: How many vowels
+    const vowels = word.split('').filter(c => 'AEIOU'.includes(c)).length;
+    const consonants = 5 - vowels;
+    const taunts = [
+      `Ugh FINE. It has ${vowels} vowel${vowels!==1?'s':''}. Happy now?? 🙄`,
+      `${vowels} vowels, ${consonants} consonants. I'm basically DOING it for you.`,
+      `It has ${vowels} vowel${vowels!==1?'s':''}... that's ALL you get.`,
+    ];
+    clueText = taunts[Math.floor(Math.random() * taunts.length)];
+  } else if (clueLevel === 2) {
+    // Clue 2: First letter
+    const taunts = [
+      `It starts with "${word[0]}". If you can't get it now I'm leaving. 🐒`,
+      `First letter: "${word[0]}". I'm GIVING this to you on a plate.`,
+      `"${word[0]}" is the first letter. You OWE me a banana for this.`,
+    ];
+    clueText = taunts[Math.floor(Math.random() * taunts.length)];
+  } else if (clueLevel === 3) {
+    // Clue 3: Last letter
+    const taunts = [
+      `ALSO ends with "${word[4]}". At this point I should just SPELL it. 💀`,
+      `Ends in "${word[4]}". Starts with "${word[0]}", ends with "${word[4]}". Do I need to hold your hand too?`,
+      `Last letter is "${word[4]}". Three clues. I want three bananas. 🍌🍌🍌`,
+    ];
+    clueText = taunts[Math.floor(Math.random() * taunts.length)];
+  } else if (clueLevel === 4) {
+    // Clue 4: Reveal a random middle letter position
+    const midIdx = 1 + Math.floor(Math.random() * 3); // positions 1-3
+    const pos = ['first','second','third','fourth','fifth'][midIdx];
+    const taunts = [
+      `The ${pos} letter is "${word[midIdx]}". I literally cannot help more without TYPING it for you.`,
+      `"${word[midIdx]}" in position ${midIdx+1}. This is CHARITY at this point.`,
+      `Position ${midIdx+1} = "${word[midIdx]}". I'm losing brain cells watching this. 🧠💥`,
+    ];
+    clueText = taunts[Math.floor(Math.random() * taunts.length)];
+  } else {
+    // No more clues
+    const taunts = [
+      "NO MORE CLUES. I've given you EVERYTHING. Figure it out!! 😤",
+      "I'm not spelling the whole word for you. I have STANDARDS.",
+      "Clue machine is BROKEN. By which I mean I broke it. On purpose. 🐒",
+      "You've used all the clues. The banana budget is EMPTY.",
+      "I refuse. ABSOLUTELY refuse. Try harder.",
+    ];
+    clueText = taunts[Math.floor(Math.random() * taunts.length)];
+  }
+
+  showSpeech(clueText, 5000);
+  setMascot('thinking', null, 'excited', 4000);
+}
+
+function showSpeech(text, duration) {
+  const bubble = document.getElementById('speech-bubble');
+  bubble.textContent = text;
+  bubble.classList.add('show');
+  setTimeout(() => bubble.classList.remove('show'), duration || 3000);
+}
+
+function resetClues() { clueLevel = 0; }
+
 // Random monkey intrusion while playing
 let intrudeTimer = null;
 function startMonkeyIntrusions() {
@@ -2104,9 +2191,21 @@ function toggleRollingMode() {
     loadRollingState();
     buildRollingBoard();
     restoreRollingGame();
+    // Reset keyboard to only show current game's letter states
+    buildKeyboard();
+    Object.entries(letterStates).forEach(([letter, state]) => {
+      const key = document.getElementById(`key-${letter}`);
+      if (key) key.classList.add(state);
+    });
+    rollingState.wasActive = true;
+    saveRollingState();
   } else {
     // Switch back to normal mode
+    rollingState.wasActive = false;
     saveRollingState();
+    // Rebuild keyboard for daily mode
+    buildKeyboard();
+    restoreSavedGame();
   }
 }
 
@@ -2311,11 +2410,18 @@ function rollingNextGame() {
   currentGuess = '';
   gameOver = false;
   letterStates = {};
+  clueLevel = 0;
   targetWord = nextWord;
   VALID_GUESSES.add(nextWord.toLowerCase());
 
-  // Rebuild keyboard
+  // Rebuild keyboard — clear all key colors
   buildKeyboard();
+  document.querySelectorAll('.key').forEach(k => {
+    k.classList.remove('correct', 'present', 'absent');
+  });
+
+  // Save clean state immediately (before animation) so reloads don't get stale keyboard
+  saveRollingState();
 
   // Animate transition
   const boardEl = document.getElementById('rolling-board');
@@ -2377,6 +2483,14 @@ async function init() {
 
   restoreSavedGame();
   updateDateNav();
+
+  // Auto-restore rolling mode if it was active
+  try {
+    const savedRolling = JSON.parse(localStorage.getItem('wordle-rolling'));
+    if (savedRolling && savedRolling.wasActive) {
+      toggleRollingMode();
+    }
+  } catch {}
 }
 
 init();
