@@ -26,55 +26,80 @@
 body.monkey {
   --green: #e86820;
   --yellow: #f0c830;
-  --grey: #bab0a0;
-  --dark-grey: #e0d8cc;
-  --light-grey: #d0c8b8;
-  --bg: #faf5ee;
-  --tile-bg: #faf5ee;
-  --tile-border: #d0c8b8;
-  --text: #3a3020;
-  --key-bg: #e0d8cc;
+  --grey: #7a8a6a;
+  --dark-grey: #3a5a30;
+  --light-grey: #5a7a4a;
+  --bg: #2a4a20;
+  --tile-bg: rgba(20,35,15,0.85);
+  --tile-border: #4a6a3a;
+  --text: #e8e0d0;
+  --key-bg: rgba(30,50,20,0.9);
+  background:
+    /* Leaf canopy overlay */
+    radial-gradient(ellipse 80px 40px at 15% 8%, rgba(40,80,20,0.7) 0%, transparent 100%),
+    radial-gradient(ellipse 60px 35px at 75% 5%, rgba(50,90,30,0.6) 0%, transparent 100%),
+    radial-gradient(ellipse 90px 45px at 45% 3%, rgba(35,75,20,0.7) 0%, transparent 100%),
+    radial-gradient(ellipse 70px 30px at 90% 10%, rgba(45,85,25,0.5) 0%, transparent 100%),
+    radial-gradient(ellipse 50px 25px at 5% 15%, rgba(55,95,35,0.4) 0%, transparent 100%),
+    /* Vine streaks */
+    linear-gradient(175deg, transparent 48%, rgba(30,70,15,0.3) 49%, rgba(30,70,15,0.3) 49.5%, transparent 50%),
+    linear-gradient(185deg, transparent 30%, rgba(25,65,12,0.2) 30.5%, rgba(25,65,12,0.2) 31%, transparent 31.5%),
+    /* Dappled sunlight */
+    radial-gradient(circle 30px at 20% 30%, rgba(180,160,60,0.08) 0%, transparent 100%),
+    radial-gradient(circle 25px at 60% 50%, rgba(180,160,60,0.06) 0%, transparent 100%),
+    radial-gradient(circle 35px at 80% 70%, rgba(180,160,60,0.07) 0%, transparent 100%),
+    radial-gradient(circle 20px at 35% 80%, rgba(180,160,60,0.05) 0%, transparent 100%),
+    /* Base gradient - deep jungle */
+    linear-gradient(180deg, #1a3a12 0%, #2a4a20 30%, #1e3818 70%, #152a10 100%);
+  background-attachment: fixed;
 }
 body.monkey .tile.correct {
-  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' x='15' font-size='70'>🍌</text></svg>") center/cover, var(--green) !important;
-  border-color: var(--green) !important;
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23e86820' width='100' height='100' rx='4'/><text y='78' x='12' font-size='72' opacity='0.3'>🍌</text></svg>") center/cover !important;
+  border-color: #c05818 !important;
   color: white !important;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
 }
 body.monkey .tile.present {
-  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' x='15' font-size='70'>🐒</text></svg>") center/cover, var(--yellow) !important;
-  border-color: var(--yellow) !important;
-  color: #3a3020 !important;
-  text-shadow: 1px 1px 1px rgba(255,255,255,0.5);
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23f0c830' width='100' height='100' rx='4'/><text y='78' x='12' font-size='72' opacity='0.25'>🐒</text></svg>") center/cover !important;
+  border-color: #d0a820 !important;
+  color: #2a1a08 !important;
+  text-shadow: 1px 1px 1px rgba(255,255,255,0.4);
 }
 body.monkey .tile.absent {
-  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' x='15' font-size='70'>🌴</text></svg>") center/cover, var(--grey) !important;
-  border-color: var(--grey) !important;
-  color: white !important;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.4);
+  background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23485840' width='100' height='100' rx='4'/><text y='78' x='12' font-size='72' opacity='0.2'>🌴</text></svg>") center/cover !important;
+  border-color: #3a4830 !important;
+  color: #a0b890 !important;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
 }
 body.monkey .tile.filled { border-color: #8a8070 !important; }
+body.monkey .tile.filled { border-color: #6a8a5a !important; color: #e8e0d0 !important; }
 body.monkey .key.correct { background: var(--green) !important; color: white !important; }
-body.monkey .key.present { background: var(--yellow) !important; color: #3a3020 !important; }
-body.monkey .key.absent { background: #d0c8b8 !important; color: #9a9080 !important; }
-body.monkey .key { color: #3a3020; }
-body.monkey header { border-color: #e0d8cc; }
-body.monkey #date-nav { border-color: #e0d8cc; }
-body.monkey .nav-arrow { color: #3a3020; }
-body.monkey .nav-arrow:hover { background: #e0d8cc; }
+body.monkey .key.present { background: var(--yellow) !important; color: #2a1a08 !important; }
+body.monkey .key.absent { background: rgba(20,35,15,0.8) !important; color: #6a7a5a !important; }
+body.monkey .key { color: #c8d8b0; background: rgba(40,65,30,0.85); }
+body.monkey header { border-color: rgba(80,120,50,0.4); background: rgba(15,30,10,0.6); }
+body.monkey #date-nav { border-color: rgba(80,120,50,0.4); background: rgba(15,30,10,0.4); }
+body.monkey .nav-arrow { color: #a0c080; }
+body.monkey .nav-arrow:hover { background: rgba(60,90,40,0.5); }
+body.monkey .nav-arrow:disabled { color: #4a6a3a; }
 body.monkey #today-nav-btn { background: #e86820; }
-body.monkey .toast { background: #3a3020; color: #faf5ee; }
-body.monkey .modal-box { background: #f0ebe0; color: #3a3020; }
-body.monkey .modal-box p, body.monkey .stat .label, body.monkey #history-section h3 { color: #8a7a6a; }
-body.monkey .modal-box .bar { background: #d0c8b8; }
+body.monkey #date-text, body.monkey #date-day-num { color: #c8d8b0; }
+body.monkey .toast { background: #1a3012; color: #c8d8a0; border: 1px solid #4a6a3a; }
+body.monkey .modal-box { background: rgba(20,38,15,0.95); color: #d8e0c8; border: 1px solid #4a6a3a; }
+body.monkey .modal-box p, body.monkey .stat .label, body.monkey #history-section h3 { color: #8aaa70; }
+body.monkey .modal-box .bar { background: #2a4a20; }
 body.monkey .modal-box .bar.highlight { background: #e86820; }
-body.monkey .modal-overlay { background: rgba(60,40,20,0.5); }
-body.monkey .setting-row { border-color: #d0c8b8; }
-body.monkey .setting-info .setting-desc { color: #8a7a6a; }
-body.monkey .toggle .slider { background: #d0c8b8; }
+body.monkey .modal-overlay { background: rgba(10,20,8,0.7); }
+body.monkey .setting-row { border-color: #3a5a30; }
+body.monkey .setting-info .setting-desc { color: #8aaa70; }
+body.monkey .toggle .slider { background: #3a5a30; }
 body.monkey .toggle input:checked + .slider { background: #e86820; }
-body.monkey .history-row { border-color: #e0d8cc; }
-body.monkey .h-date { color: #8a7a6a !important; }
+body.monkey .history-row { border-color: #2a4a20; }
+body.monkey .h-date { color: #8aaa70 !important; }
+body.monkey .h-result.win { color: #e86820 !important; }
+body.monkey .h-result.loss { color: #7a8a6a !important; }
+body.monkey .share-btn { background: #e86820 !important; }
+body.monkey #hard-badge { color: #e86820; }
 
 body.monkey .row.win-bounce .tile {
   animation: monkeyBounce 0.6s ease;
