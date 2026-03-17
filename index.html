@@ -655,6 +655,27 @@ function validateHardMode(guess) {
     }
   }
 
+  // Track letters confirmed absent (grey in all appearances, never green/yellow)
+  const knownAbsent = new Set();
+  const knownUsed = new Set(); // letters that are green or yellow somewhere
+  for (const prev of boardState) {
+    for (let i = 0; i < WORD_LENGTH; i++) {
+      const letter = prev.guess[i];
+      const state = prev.result[i];
+      if (state === 'correct' || state === 'present') {
+        knownUsed.add(letter);
+      }
+    }
+  }
+  for (const prev of boardState) {
+    for (let i = 0; i < WORD_LENGTH; i++) {
+      const letter = prev.guess[i];
+      if (prev.result[i] === 'absent' && !knownUsed.has(letter)) {
+        knownAbsent.add(letter);
+      }
+    }
+  }
+
   // Check green constraints
   for (const [pos, letter] of Object.entries(mustBeAt)) {
     if (guess[pos] !== letter) {
@@ -664,15 +685,20 @@ function validateHardMode(guess) {
 
   // Check yellow constraints: letter must appear, and not in a previously-yellow position
   for (const [letter, badPositions] of Object.entries(mustInclude)) {
-    // Skip if this letter is already locked as green somewhere
     if (!guess.includes(letter)) {
       return `Guess must contain ${letter}`;
     }
-    // Check it's not placed back in a known-wrong spot
     for (const pos of badPositions) {
       if (guess[pos] === letter && !mustBeAt[pos]) {
         return `${letter} can't be ${ordinal(pos+1)} letter`;
       }
+    }
+  }
+
+  // Check absent constraint: can't reuse letters confirmed as not in the word
+  for (let i = 0; i < WORD_LENGTH; i++) {
+    if (knownAbsent.has(guess[i])) {
+      return `${guess[i]} is not in the word`;
     }
   }
 
