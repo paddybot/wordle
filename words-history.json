@@ -1,4 +1,2804 @@
 {
+  "2024-03-17": {
+    "day": 1002,
+    "solution": "snort"
+  },
+  "2024-03-18": {
+    "day": 1003,
+    "solution": "spelt"
+  },
+  "2024-03-19": {
+    "day": 1004,
+    "solution": "abide"
+  },
+  "2024-03-20": {
+    "day": 1005,
+    "solution": "lingo"
+  },
+  "2024-03-21": {
+    "day": 1006,
+    "solution": "shade"
+  },
+  "2024-03-22": {
+    "day": 1007,
+    "solution": "decay"
+  },
+  "2024-03-23": {
+    "day": 1008,
+    "solution": "risen"
+  },
+  "2024-03-24": {
+    "day": 1009,
+    "solution": "towel"
+  },
+  "2024-03-25": {
+    "day": 1010,
+    "solution": "sally"
+  },
+  "2024-03-26": {
+    "day": 1011,
+    "solution": "mayor"
+  },
+  "2024-03-27": {
+    "day": 1012,
+    "solution": "stung"
+  },
+  "2024-03-28": {
+    "day": 1013,
+    "solution": "speak"
+  },
+  "2024-03-29": {
+    "day": 1014,
+    "solution": "realm"
+  },
+  "2024-03-30": {
+    "day": 1015,
+    "solution": "force"
+  },
+  "2024-03-31": {
+    "day": 1016,
+    "solution": "taboo"
+  },
+  "2024-04-01": {
+    "day": 1017,
+    "solution": "frond"
+  },
+  "2024-04-02": {
+    "day": 1018,
+    "solution": "serum"
+  },
+  "2024-04-03": {
+    "day": 1019,
+    "solution": "plait"
+  },
+  "2024-04-04": {
+    "day": 1020,
+    "solution": "climb"
+  },
+  "2024-04-05": {
+    "day": 1021,
+    "solution": "wrist"
+  },
+  "2024-04-06": {
+    "day": 1022,
+    "solution": "finch"
+  },
+  "2024-04-07": {
+    "day": 1023,
+    "solution": "voila"
+  },
+  "2024-04-08": {
+    "day": 1024,
+    "solution": "breed"
+  },
+  "2024-04-09": {
+    "day": 1025,
+    "solution": "merge"
+  },
+  "2024-04-10": {
+    "day": 1026,
+    "solution": "broth"
+  },
+  "2024-04-11": {
+    "day": 1027,
+    "solution": "louse"
+  },
+  "2024-04-12": {
+    "day": 1028,
+    "solution": "whiny"
+  },
+  "2024-04-13": {
+    "day": 1029,
+    "solution": "steel"
+  },
+  "2024-04-14": {
+    "day": 1030,
+    "solution": "blimp"
+  },
+  "2024-04-15": {
+    "day": 1031,
+    "solution": "equip"
+  },
+  "2024-04-16": {
+    "day": 1032,
+    "solution": "shank"
+  },
+  "2024-04-17": {
+    "day": 1033,
+    "solution": "tithe"
+  },
+  "2024-04-18": {
+    "day": 1034,
+    "solution": "facet"
+  },
+  "2024-04-19": {
+    "day": 1035,
+    "solution": "raise"
+  },
+  "2024-04-20": {
+    "day": 1036,
+    "solution": "lucid"
+  },
+  "2024-04-21": {
+    "day": 1037,
+    "solution": "jolly"
+  },
+  "2024-04-22": {
+    "day": 1038,
+    "solution": "laser"
+  },
+  "2024-04-23": {
+    "day": 1039,
+    "solution": "rover"
+  },
+  "2024-04-24": {
+    "day": 1040,
+    "solution": "overt"
+  },
+  "2024-04-25": {
+    "day": 1041,
+    "solution": "intro"
+  },
+  "2024-04-26": {
+    "day": 1042,
+    "solution": "vapid"
+  },
+  "2024-04-27": {
+    "day": 1043,
+    "solution": "gleam"
+  },
+  "2024-04-28": {
+    "day": 1044,
+    "solution": "prune"
+  },
+  "2024-04-29": {
+    "day": 1045,
+    "solution": "craft"
+  },
+  "2024-04-30": {
+    "day": 1046,
+    "solution": "prowl"
+  },
+  "2024-05-01": {
+    "day": 1047,
+    "solution": "diary"
+  },
+  "2024-05-02": {
+    "day": 1048,
+    "solution": "slice"
+  },
+  "2024-05-03": {
+    "day": 1049,
+    "solution": "ebony"
+  },
+  "2024-05-04": {
+    "day": 1050,
+    "solution": "value"
+  },
+  "2024-05-05": {
+    "day": 1051,
+    "solution": "decal"
+  },
+  "2024-05-06": {
+    "day": 1052,
+    "solution": "shave"
+  },
+  "2024-05-07": {
+    "day": 1053,
+    "solution": "musty"
+  },
+  "2024-05-08": {
+    "day": 1054,
+    "solution": "pious"
+  },
+  "2024-05-09": {
+    "day": 1055,
+    "solution": "jerky"
+  },
+  "2024-05-10": {
+    "day": 1056,
+    "solution": "media"
+  },
+  "2024-05-11": {
+    "day": 1057,
+    "solution": "tidal"
+  },
+  "2024-05-12": {
+    "day": 1058,
+    "solution": "outer"
+  },
+  "2024-05-13": {
+    "day": 1059,
+    "solution": "cumin"
+  },
+  "2024-05-14": {
+    "day": 1060,
+    "solution": "amass"
+  },
+  "2024-05-15": {
+    "day": 1061,
+    "solution": "pinch"
+  },
+  "2024-05-16": {
+    "day": 1062,
+    "solution": "stall"
+  },
+  "2024-05-17": {
+    "day": 1063,
+    "solution": "tutor"
+  },
+  "2024-05-18": {
+    "day": 1064,
+    "solution": "briny"
+  },
+  "2024-05-19": {
+    "day": 1065,
+    "solution": "hitch"
+  },
+  "2024-05-20": {
+    "day": 1066,
+    "solution": "nicer"
+  },
+  "2024-05-21": {
+    "day": 1067,
+    "solution": "dingo"
+  },
+  "2024-05-22": {
+    "day": 1068,
+    "solution": "exalt"
+  },
+  "2024-05-23": {
+    "day": 1069,
+    "solution": "swish"
+  },
+  "2024-05-24": {
+    "day": 1070,
+    "solution": "glide"
+  },
+  "2024-05-25": {
+    "day": 1071,
+    "solution": "titan"
+  },
+  "2024-05-26": {
+    "day": 1072,
+    "solution": "bevel"
+  },
+  "2024-05-27": {
+    "day": 1073,
+    "solution": "skier"
+  },
+  "2024-05-28": {
+    "day": 1074,
+    "solution": "minus"
+  },
+  "2024-05-29": {
+    "day": 1075,
+    "solution": "papal"
+  },
+  "2024-05-30": {
+    "day": 1076,
+    "solution": "gummy"
+  },
+  "2024-05-31": {
+    "day": 1077,
+    "solution": "chaos"
+  },
+  "2024-06-01": {
+    "day": 1078,
+    "solution": "basin"
+  },
+  "2024-06-02": {
+    "day": 1079,
+    "solution": "bravo"
+  },
+  "2024-06-03": {
+    "day": 1080,
+    "solution": "stark"
+  },
+  "2024-06-04": {
+    "day": 1081,
+    "solution": "groom"
+  },
+  "2024-06-05": {
+    "day": 1082,
+    "solution": "organ"
+  },
+  "2024-06-06": {
+    "day": 1083,
+    "solution": "ether"
+  },
+  "2024-06-07": {
+    "day": 1084,
+    "solution": "melon"
+  },
+  "2024-06-08": {
+    "day": 1085,
+    "solution": "hence"
+  },
+  "2024-06-09": {
+    "day": 1086,
+    "solution": "crowd"
+  },
+  "2024-06-10": {
+    "day": 1087,
+    "solution": "manga"
+  },
+  "2024-06-11": {
+    "day": 1088,
+    "solution": "swung"
+  },
+  "2024-06-12": {
+    "day": 1089,
+    "solution": "deter"
+  },
+  "2024-06-13": {
+    "day": 1090,
+    "solution": "angst"
+  },
+  "2024-06-14": {
+    "day": 1091,
+    "solution": "vault"
+  },
+  "2024-06-15": {
+    "day": 1092,
+    "solution": "proud"
+  },
+  "2024-06-16": {
+    "day": 1093,
+    "solution": "grind"
+  },
+  "2024-06-17": {
+    "day": 1094,
+    "solution": "prior"
+  },
+  "2024-06-18": {
+    "day": 1095,
+    "solution": "cover"
+  },
+  "2024-06-19": {
+    "day": 1096,
+    "solution": "terse"
+  },
+  "2024-06-20": {
+    "day": 1097,
+    "solution": "scent"
+  },
+  "2024-06-21": {
+    "day": 1098,
+    "solution": "paint"
+  },
+  "2024-06-22": {
+    "day": 1099,
+    "solution": "edict"
+  },
+  "2024-06-23": {
+    "day": 1100,
+    "solution": "bugle"
+  },
+  "2024-06-24": {
+    "day": 1101,
+    "solution": "dolly"
+  },
+  "2024-06-25": {
+    "day": 1102,
+    "solution": "savor"
+  },
+  "2024-06-26": {
+    "day": 1103,
+    "solution": "knead"
+  },
+  "2024-06-27": {
+    "day": 1104,
+    "solution": "order"
+  },
+  "2024-06-28": {
+    "day": 1105,
+    "solution": "drove"
+  },
+  "2024-06-29": {
+    "day": 1106,
+    "solution": "zebra"
+  },
+  "2024-06-30": {
+    "day": 1107,
+    "solution": "buddy"
+  },
+  "2024-07-01": {
+    "day": 1108,
+    "solution": "adage"
+  },
+  "2024-07-02": {
+    "day": 1109,
+    "solution": "inlay"
+  },
+  "2024-07-03": {
+    "day": 1110,
+    "solution": "thigh"
+  },
+  "2024-07-04": {
+    "day": 1111,
+    "solution": "debut"
+  },
+  "2024-07-05": {
+    "day": 1112,
+    "solution": "crush"
+  },
+  "2024-07-06": {
+    "day": 1113,
+    "solution": "scoff"
+  },
+  "2024-07-07": {
+    "day": 1114,
+    "solution": "canon"
+  },
+  "2024-07-08": {
+    "day": 1115,
+    "solution": "shape"
+  },
+  "2024-07-09": {
+    "day": 1116,
+    "solution": "blare"
+  },
+  "2024-07-10": {
+    "day": 1117,
+    "solution": "gaunt"
+  },
+  "2024-07-11": {
+    "day": 1118,
+    "solution": "cameo"
+  },
+  "2024-07-12": {
+    "day": 1119,
+    "solution": "jiffy"
+  },
+  "2024-07-13": {
+    "day": 1120,
+    "solution": "enact"
+  },
+  "2024-07-14": {
+    "day": 1121,
+    "solution": "video"
+  },
+  "2024-07-15": {
+    "day": 1122,
+    "solution": "swoon"
+  },
+  "2024-07-16": {
+    "day": 1123,
+    "solution": "decoy"
+  },
+  "2024-07-17": {
+    "day": 1124,
+    "solution": "quite"
+  },
+  "2024-07-18": {
+    "day": 1125,
+    "solution": "nerdy"
+  },
+  "2024-07-19": {
+    "day": 1126,
+    "solution": "refer"
+  },
+  "2024-07-20": {
+    "day": 1127,
+    "solution": "shaft"
+  },
+  "2024-07-21": {
+    "day": 1128,
+    "solution": "speck"
+  },
+  "2024-07-22": {
+    "day": 1129,
+    "solution": "cadet"
+  },
+  "2024-07-23": {
+    "day": 1130,
+    "solution": "prong"
+  },
+  "2024-07-24": {
+    "day": 1131,
+    "solution": "forte"
+  },
+  "2024-07-25": {
+    "day": 1132,
+    "solution": "porch"
+  },
+  "2024-07-26": {
+    "day": 1133,
+    "solution": "awash"
+  },
+  "2024-07-27": {
+    "day": 1134,
+    "solution": "juice"
+  },
+  "2024-07-28": {
+    "day": 1135,
+    "solution": "smock"
+  },
+  "2024-07-29": {
+    "day": 1136,
+    "solution": "super"
+  },
+  "2024-07-30": {
+    "day": 1137,
+    "solution": "feral"
+  },
+  "2024-07-31": {
+    "day": 1138,
+    "solution": "penne"
+  },
+  "2024-08-01": {
+    "day": 1139,
+    "solution": "chalk"
+  },
+  "2024-08-02": {
+    "day": 1140,
+    "solution": "flake"
+  },
+  "2024-08-03": {
+    "day": 1141,
+    "solution": "scale"
+  },
+  "2024-08-04": {
+    "day": 1142,
+    "solution": "lower"
+  },
+  "2024-08-05": {
+    "day": 1143,
+    "solution": "ensue"
+  },
+  "2024-08-06": {
+    "day": 1144,
+    "solution": "anvil"
+  },
+  "2024-08-07": {
+    "day": 1145,
+    "solution": "macaw"
+  },
+  "2024-08-08": {
+    "day": 1146,
+    "solution": "saucy"
+  },
+  "2024-08-09": {
+    "day": 1147,
+    "solution": "ounce"
+  },
+  "2024-08-10": {
+    "day": 1148,
+    "solution": "medic"
+  },
+  "2024-08-11": {
+    "day": 1149,
+    "solution": "scone"
+  },
+  "2024-08-12": {
+    "day": 1150,
+    "solution": "skiff"
+  },
+  "2024-08-13": {
+    "day": 1151,
+    "solution": "neigh"
+  },
+  "2024-08-14": {
+    "day": 1152,
+    "solution": "shore"
+  },
+  "2024-08-15": {
+    "day": 1153,
+    "solution": "acorn"
+  },
+  "2024-08-16": {
+    "day": 1154,
+    "solution": "brace"
+  },
+  "2024-08-17": {
+    "day": 1155,
+    "solution": "storm"
+  },
+  "2024-08-18": {
+    "day": 1156,
+    "solution": "lanky"
+  },
+  "2024-08-19": {
+    "day": 1157,
+    "solution": "meter"
+  },
+  "2024-08-20": {
+    "day": 1158,
+    "solution": "delay"
+  },
+  "2024-08-21": {
+    "day": 1159,
+    "solution": "mulch"
+  },
+  "2024-08-22": {
+    "day": 1160,
+    "solution": "brute"
+  },
+  "2024-08-23": {
+    "day": 1161,
+    "solution": "leech"
+  },
+  "2024-08-24": {
+    "day": 1162,
+    "solution": "filet"
+  },
+  "2024-08-25": {
+    "day": 1163,
+    "solution": "skate"
+  },
+  "2024-08-26": {
+    "day": 1164,
+    "solution": "stake"
+  },
+  "2024-08-27": {
+    "day": 1165,
+    "solution": "crown"
+  },
+  "2024-08-28": {
+    "day": 1166,
+    "solution": "lithe"
+  },
+  "2024-08-29": {
+    "day": 1167,
+    "solution": "flunk"
+  },
+  "2024-08-30": {
+    "day": 1168,
+    "solution": "knave"
+  },
+  "2024-08-31": {
+    "day": 1169,
+    "solution": "spout"
+  },
+  "2024-09-01": {
+    "day": 1170,
+    "solution": "mushy"
+  },
+  "2024-09-02": {
+    "day": 1171,
+    "solution": "camel"
+  },
+  "2024-09-03": {
+    "day": 1172,
+    "solution": "faint"
+  },
+  "2024-09-04": {
+    "day": 1173,
+    "solution": "stern"
+  },
+  "2024-09-05": {
+    "day": 1174,
+    "solution": "widen"
+  },
+  "2024-09-06": {
+    "day": 1175,
+    "solution": "rerun"
+  },
+  "2024-09-07": {
+    "day": 1176,
+    "solution": "owner"
+  },
+  "2024-09-08": {
+    "day": 1177,
+    "solution": "drawn"
+  },
+  "2024-09-09": {
+    "day": 1178,
+    "solution": "debit"
+  },
+  "2024-09-10": {
+    "day": 1179,
+    "solution": "rebel"
+  },
+  "2024-09-11": {
+    "day": 1180,
+    "solution": "aisle"
+  },
+  "2024-09-12": {
+    "day": 1181,
+    "solution": "brass"
+  },
+  "2024-09-13": {
+    "day": 1182,
+    "solution": "harsh"
+  },
+  "2024-09-14": {
+    "day": 1183,
+    "solution": "broad"
+  },
+  "2024-09-15": {
+    "day": 1184,
+    "solution": "recur"
+  },
+  "2024-09-16": {
+    "day": 1185,
+    "solution": "honey"
+  },
+  "2024-09-17": {
+    "day": 1186,
+    "solution": "beaut"
+  },
+  "2024-09-18": {
+    "day": 1187,
+    "solution": "fully"
+  },
+  "2024-09-19": {
+    "day": 1188,
+    "solution": "press"
+  },
+  "2024-09-20": {
+    "day": 1189,
+    "solution": "smoke"
+  },
+  "2024-09-21": {
+    "day": 1190,
+    "solution": "seven"
+  },
+  "2024-09-22": {
+    "day": 1191,
+    "solution": "teach"
+  },
+  "2024-09-23": {
+    "day": 1192,
+    "solution": "steam"
+  },
+  "2024-09-24": {
+    "day": 1193,
+    "solution": "handy"
+  },
+  "2024-09-25": {
+    "day": 1194,
+    "solution": "torch"
+  },
+  "2024-09-26": {
+    "day": 1195,
+    "solution": "thank"
+  },
+  "2024-09-27": {
+    "day": 1196,
+    "solution": "faith"
+  },
+  "2024-09-28": {
+    "day": 1197,
+    "solution": "brain"
+  },
+  "2024-09-29": {
+    "day": 1198,
+    "solution": "rider"
+  },
+  "2024-09-30": {
+    "day": 1199,
+    "solution": "cloud"
+  },
+  "2024-10-01": {
+    "day": 1200,
+    "solution": "modem"
+  },
+  "2024-10-02": {
+    "day": 1201,
+    "solution": "shell"
+  },
+  "2024-10-03": {
+    "day": 1202,
+    "solution": "wagon"
+  },
+  "2024-10-04": {
+    "day": 1203,
+    "solution": "title"
+  },
+  "2024-10-05": {
+    "day": 1204,
+    "solution": "miner"
+  },
+  "2024-10-06": {
+    "day": 1205,
+    "solution": "lager"
+  },
+  "2024-10-07": {
+    "day": 1206,
+    "solution": "flour"
+  },
+  "2024-10-08": {
+    "day": 1207,
+    "solution": "joint"
+  },
+  "2024-10-09": {
+    "day": 1208,
+    "solution": "mommy"
+  },
+  "2024-10-10": {
+    "day": 1209,
+    "solution": "carve"
+  },
+  "2024-10-11": {
+    "day": 1210,
+    "solution": "gusty"
+  },
+  "2024-10-12": {
+    "day": 1211,
+    "solution": "stain"
+  },
+  "2024-10-13": {
+    "day": 1212,
+    "solution": "prone"
+  },
+  "2024-10-14": {
+    "day": 1213,
+    "solution": "gamut"
+  },
+  "2024-10-15": {
+    "day": 1214,
+    "solution": "corer"
+  },
+  "2024-10-16": {
+    "day": 1215,
+    "solution": "grant"
+  },
+  "2024-10-17": {
+    "day": 1216,
+    "solution": "halve"
+  },
+  "2024-10-18": {
+    "day": 1217,
+    "solution": "stint"
+  },
+  "2024-10-19": {
+    "day": 1218,
+    "solution": "fiber"
+  },
+  "2024-10-20": {
+    "day": 1219,
+    "solution": "dicey"
+  },
+  "2024-10-21": {
+    "day": 1220,
+    "solution": "spoon"
+  },
+  "2024-10-22": {
+    "day": 1221,
+    "solution": "shout"
+  },
+  "2024-10-23": {
+    "day": 1222,
+    "solution": "goofy"
+  },
+  "2024-10-24": {
+    "day": 1223,
+    "solution": "bossy"
+  },
+  "2024-10-25": {
+    "day": 1224,
+    "solution": "frown"
+  },
+  "2024-10-26": {
+    "day": 1225,
+    "solution": "wreak"
+  },
+  "2024-10-27": {
+    "day": 1226,
+    "solution": "sandy"
+  },
+  "2024-10-28": {
+    "day": 1227,
+    "solution": "bawdy"
+  },
+  "2024-10-29": {
+    "day": 1228,
+    "solution": "tunic"
+  },
+  "2024-10-30": {
+    "day": 1229,
+    "solution": "easel"
+  },
+  "2024-10-31": {
+    "day": 1230,
+    "solution": "weird"
+  },
+  "2024-11-01": {
+    "day": 1231,
+    "solution": "sixth"
+  },
+  "2024-11-02": {
+    "day": 1232,
+    "solution": "snoop"
+  },
+  "2024-11-03": {
+    "day": 1233,
+    "solution": "blaze"
+  },
+  "2024-11-04": {
+    "day": 1234,
+    "solution": "vinyl"
+  },
+  "2024-11-05": {
+    "day": 1235,
+    "solution": "octet"
+  },
+  "2024-11-06": {
+    "day": 1236,
+    "solution": "truly"
+  },
+  "2024-11-07": {
+    "day": 1237,
+    "solution": "event"
+  },
+  "2024-11-08": {
+    "day": 1238,
+    "solution": "ready"
+  },
+  "2024-11-09": {
+    "day": 1239,
+    "solution": "swell"
+  },
+  "2024-11-10": {
+    "day": 1240,
+    "solution": "inner"
+  },
+  "2024-11-11": {
+    "day": 1241,
+    "solution": "stoic"
+  },
+  "2024-11-12": {
+    "day": 1242,
+    "solution": "flown"
+  },
+  "2024-11-13": {
+    "day": 1243,
+    "solution": "primp"
+  },
+  "2024-11-14": {
+    "day": 1244,
+    "solution": "uvula"
+  },
+  "2024-11-15": {
+    "day": 1245,
+    "solution": "tacky"
+  },
+  "2024-11-16": {
+    "day": 1246,
+    "solution": "visor"
+  },
+  "2024-11-17": {
+    "day": 1247,
+    "solution": "tally"
+  },
+  "2024-11-18": {
+    "day": 1248,
+    "solution": "frail"
+  },
+  "2024-11-19": {
+    "day": 1249,
+    "solution": "going"
+  },
+  "2024-11-20": {
+    "day": 1250,
+    "solution": "niche"
+  },
+  "2024-11-21": {
+    "day": 1251,
+    "solution": "spine"
+  },
+  "2024-11-22": {
+    "day": 1252,
+    "solution": "pearl"
+  },
+  "2024-11-23": {
+    "day": 1253,
+    "solution": "jelly"
+  },
+  "2024-11-24": {
+    "day": 1254,
+    "solution": "twist"
+  },
+  "2024-11-25": {
+    "day": 1255,
+    "solution": "brown"
+  },
+  "2024-11-26": {
+    "day": 1256,
+    "solution": "witch"
+  },
+  "2024-11-27": {
+    "day": 1257,
+    "solution": "slang"
+  },
+  "2024-11-28": {
+    "day": 1258,
+    "solution": "chock"
+  },
+  "2024-11-29": {
+    "day": 1259,
+    "solution": "hippo"
+  },
+  "2024-11-30": {
+    "day": 1260,
+    "solution": "dogma"
+  },
+  "2024-12-01": {
+    "day": 1261,
+    "solution": "mauve"
+  },
+  "2024-12-02": {
+    "day": 1262,
+    "solution": "guile"
+  },
+  "2024-12-03": {
+    "day": 1263,
+    "solution": "shaky"
+  },
+  "2024-12-04": {
+    "day": 1264,
+    "solution": "crypt"
+  },
+  "2024-12-05": {
+    "day": 1265,
+    "solution": "endow"
+  },
+  "2024-12-06": {
+    "day": 1266,
+    "solution": "shove"
+  },
+  "2024-12-07": {
+    "day": 1267,
+    "solution": "hilly"
+  },
+  "2024-12-08": {
+    "day": 1268,
+    "solution": "hyena"
+  },
+  "2024-12-09": {
+    "day": 1269,
+    "solution": "flung"
+  },
+  "2024-12-10": {
+    "day": 1270,
+    "solution": "patio"
+  },
+  "2024-12-11": {
+    "day": 1271,
+    "solution": "plumb"
+  },
+  "2024-12-12": {
+    "day": 1272,
+    "solution": "vying"
+  },
+  "2024-12-13": {
+    "day": 1273,
+    "solution": "boxer"
+  },
+  "2024-12-14": {
+    "day": 1274,
+    "solution": "drool"
+  },
+  "2024-12-15": {
+    "day": 1275,
+    "solution": "funky"
+  },
+  "2024-12-16": {
+    "day": 1276,
+    "solution": "boast"
+  },
+  "2024-12-17": {
+    "day": 1277,
+    "solution": "scowl"
+  },
+  "2024-12-18": {
+    "day": 1278,
+    "solution": "hefty"
+  },
+  "2024-12-19": {
+    "day": 1279,
+    "solution": "stray"
+  },
+  "2024-12-20": {
+    "day": 1280,
+    "solution": "flash"
+  },
+  "2024-12-21": {
+    "day": 1281,
+    "solution": "blade"
+  },
+  "2024-12-22": {
+    "day": 1282,
+    "solution": "brawn"
+  },
+  "2024-12-23": {
+    "day": 1283,
+    "solution": "sauna"
+  },
+  "2024-12-24": {
+    "day": 1284,
+    "solution": "eagle"
+  },
+  "2024-12-25": {
+    "day": 1285,
+    "solution": "share"
+  },
+  "2024-12-26": {
+    "day": 1286,
+    "solution": "affix"
+  },
+  "2024-12-27": {
+    "day": 1287,
+    "solution": "grain"
+  },
+  "2024-12-28": {
+    "day": 1288,
+    "solution": "decry"
+  },
+  "2024-12-29": {
+    "day": 1289,
+    "solution": "mambo"
+  },
+  "2024-12-30": {
+    "day": 1290,
+    "solution": "stare"
+  },
+  "2024-12-31": {
+    "day": 1291,
+    "solution": "lemur"
+  },
+  "2025-01-01": {
+    "day": 1292,
+    "solution": "nerve"
+  },
+  "2025-01-02": {
+    "day": 1293,
+    "solution": "chose"
+  },
+  "2025-01-03": {
+    "day": 1294,
+    "solution": "cheap"
+  },
+  "2025-01-04": {
+    "day": 1295,
+    "solution": "relax"
+  },
+  "2025-01-05": {
+    "day": 1296,
+    "solution": "cyber"
+  },
+  "2025-01-06": {
+    "day": 1297,
+    "solution": "sprig"
+  },
+  "2025-01-07": {
+    "day": 1298,
+    "solution": "atlas"
+  },
+  "2025-01-08": {
+    "day": 1299,
+    "solution": "draft"
+  },
+  "2025-01-09": {
+    "day": 1300,
+    "solution": "wafer"
+  },
+  "2025-01-10": {
+    "day": 1301,
+    "solution": "crawl"
+  },
+  "2025-01-11": {
+    "day": 1302,
+    "solution": "dingy"
+  },
+  "2025-01-12": {
+    "day": 1303,
+    "solution": "total"
+  },
+  "2025-01-13": {
+    "day": 1304,
+    "solution": "cloak"
+  },
+  "2025-01-14": {
+    "day": 1305,
+    "solution": "fancy"
+  },
+  "2025-01-15": {
+    "day": 1306,
+    "solution": "knack"
+  },
+  "2025-01-16": {
+    "day": 1307,
+    "solution": "flint"
+  },
+  "2025-01-17": {
+    "day": 1308,
+    "solution": "prose"
+  },
+  "2025-01-18": {
+    "day": 1309,
+    "solution": "silly"
+  },
+  "2025-01-19": {
+    "day": 1310,
+    "solution": "rower"
+  },
+  "2025-01-20": {
+    "day": 1311,
+    "solution": "squid"
+  },
+  "2025-01-21": {
+    "day": 1312,
+    "solution": "icing"
+  },
+  "2025-01-22": {
+    "day": 1313,
+    "solution": "reach"
+  },
+  "2025-01-23": {
+    "day": 1314,
+    "solution": "upper"
+  },
+  "2025-01-24": {
+    "day": 1315,
+    "solution": "crepe"
+  },
+  "2025-01-25": {
+    "day": 1316,
+    "solution": "crisp"
+  },
+  "2025-01-26": {
+    "day": 1317,
+    "solution": "sunny"
+  },
+  "2025-01-27": {
+    "day": 1318,
+    "solution": "shunt"
+  },
+  "2025-01-28": {
+    "day": 1319,
+    "solution": "fever"
+  },
+  "2025-01-29": {
+    "day": 1320,
+    "solution": "udder"
+  },
+  "2025-01-30": {
+    "day": 1321,
+    "solution": "false"
+  },
+  "2025-01-31": {
+    "day": 1322,
+    "solution": "toast"
+  },
+  "2025-02-01": {
+    "day": 1323,
+    "solution": "rivet"
+  },
+  "2025-02-02": {
+    "day": 1324,
+    "solution": "chore"
+  },
+  "2025-02-03": {
+    "day": 1325,
+    "solution": "revue"
+  },
+  "2025-02-04": {
+    "day": 1326,
+    "solution": "tooth"
+  },
+  "2025-02-05": {
+    "day": 1327,
+    "solution": "pedal"
+  },
+  "2025-02-06": {
+    "day": 1328,
+    "solution": "pupil"
+  },
+  "2025-02-07": {
+    "day": 1329,
+    "solution": "swath"
+  },
+  "2025-02-08": {
+    "day": 1330,
+    "solution": "steep"
+  },
+  "2025-02-09": {
+    "day": 1331,
+    "solution": "bonus"
+  },
+  "2025-02-10": {
+    "day": 1332,
+    "solution": "goody"
+  },
+  "2025-02-11": {
+    "day": 1333,
+    "solution": "score"
+  },
+  "2025-02-12": {
+    "day": 1334,
+    "solution": "rapid"
+  },
+  "2025-02-13": {
+    "day": 1335,
+    "solution": "rumba"
+  },
+  "2025-02-14": {
+    "day": 1336,
+    "solution": "ditty"
+  },
+  "2025-02-15": {
+    "day": 1337,
+    "solution": "crook"
+  },
+  "2025-02-16": {
+    "day": 1338,
+    "solution": "suave"
+  },
+  "2025-02-17": {
+    "day": 1339,
+    "solution": "trail"
+  },
+  "2025-02-18": {
+    "day": 1340,
+    "solution": "indie"
+  },
+  "2025-02-19": {
+    "day": 1341,
+    "solution": "madly"
+  },
+  "2025-02-20": {
+    "day": 1342,
+    "solution": "roach"
+  },
+  "2025-02-21": {
+    "day": 1343,
+    "solution": "clove"
+  },
+  "2025-02-22": {
+    "day": 1344,
+    "solution": "cream"
+  },
+  "2025-02-23": {
+    "day": 1345,
+    "solution": "otter"
+  },
+  "2025-02-24": {
+    "day": 1346,
+    "solution": "gland"
+  },
+  "2025-02-25": {
+    "day": 1347,
+    "solution": "dryer"
+  },
+  "2025-02-26": {
+    "day": 1348,
+    "solution": "award"
+  },
+  "2025-02-27": {
+    "day": 1349,
+    "solution": "lodge"
+  },
+  "2025-02-28": {
+    "day": 1350,
+    "solution": "fuzzy"
+  },
+  "2025-03-01": {
+    "day": 1351,
+    "solution": "hover"
+  },
+  "2025-03-02": {
+    "day": 1352,
+    "solution": "deity"
+  },
+  "2025-03-03": {
+    "day": 1353,
+    "solution": "spear"
+  },
+  "2025-03-04": {
+    "day": 1354,
+    "solution": "check"
+  },
+  "2025-03-05": {
+    "day": 1355,
+    "solution": "scrum"
+  },
+  "2025-03-06": {
+    "day": 1356,
+    "solution": "alert"
+  },
+  "2025-03-07": {
+    "day": 1357,
+    "solution": "troop"
+  },
+  "2025-03-08": {
+    "day": 1358,
+    "solution": "navel"
+  },
+  "2025-03-09": {
+    "day": 1359,
+    "solution": "greed"
+  },
+  "2025-03-10": {
+    "day": 1360,
+    "solution": "spite"
+  },
+  "2025-03-11": {
+    "day": 1361,
+    "solution": "track"
+  },
+  "2025-03-12": {
+    "day": 1362,
+    "solution": "mango"
+  },
+  "2025-03-13": {
+    "day": 1363,
+    "solution": "chase"
+  },
+  "2025-03-14": {
+    "day": 1364,
+    "solution": "piece"
+  },
+  "2025-03-15": {
+    "day": 1365,
+    "solution": "ladle"
+  },
+  "2025-03-16": {
+    "day": 1366,
+    "solution": "stamp"
+  },
+  "2025-03-17": {
+    "day": 1367,
+    "solution": "lasso"
+  },
+  "2025-03-18": {
+    "day": 1368,
+    "solution": "timer"
+  },
+  "2025-03-19": {
+    "day": 1369,
+    "solution": "spark"
+  },
+  "2025-03-20": {
+    "day": 1370,
+    "solution": "baste"
+  },
+  "2025-03-21": {
+    "day": 1371,
+    "solution": "nudge"
+  },
+  "2025-03-22": {
+    "day": 1372,
+    "solution": "amble"
+  },
+  "2025-03-23": {
+    "day": 1373,
+    "solution": "dopey"
+  },
+  "2025-03-24": {
+    "day": 1374,
+    "solution": "angle"
+  },
+  "2025-03-25": {
+    "day": 1375,
+    "solution": "shelf"
+  },
+  "2025-03-26": {
+    "day": 1376,
+    "solution": "elbow"
+  },
+  "2025-03-27": {
+    "day": 1377,
+    "solution": "sheet"
+  },
+  "2025-03-28": {
+    "day": 1378,
+    "solution": "verse"
+  },
+  "2025-03-29": {
+    "day": 1379,
+    "solution": "sorry"
+  },
+  "2025-03-30": {
+    "day": 1380,
+    "solution": "quota"
+  },
+  "2025-03-31": {
+    "day": 1381,
+    "solution": "booty"
+  },
+  "2025-04-01": {
+    "day": 1382,
+    "solution": "jewel"
+  },
+  "2025-04-02": {
+    "day": 1383,
+    "solution": "curse"
+  },
+  "2025-04-03": {
+    "day": 1384,
+    "solution": "shear"
+  },
+  "2025-04-04": {
+    "day": 1385,
+    "solution": "krill"
+  },
+  "2025-04-05": {
+    "day": 1386,
+    "solution": "foamy"
+  },
+  "2025-04-06": {
+    "day": 1387,
+    "solution": "villa"
+  },
+  "2025-04-07": {
+    "day": 1388,
+    "solution": "hazel"
+  },
+  "2025-04-08": {
+    "day": 1389,
+    "solution": "spare"
+  },
+  "2025-04-09": {
+    "day": 1390,
+    "solution": "wheat"
+  },
+  "2025-04-10": {
+    "day": 1391,
+    "solution": "turbo"
+  },
+  "2025-04-11": {
+    "day": 1392,
+    "solution": "arrow"
+  },
+  "2025-04-12": {
+    "day": 1393,
+    "solution": "nurse"
+  },
+  "2025-04-13": {
+    "day": 1394,
+    "solution": "laugh"
+  },
+  "2025-04-14": {
+    "day": 1395,
+    "solution": "crest"
+  },
+  "2025-04-15": {
+    "day": 1396,
+    "solution": "ashen"
+  },
+  "2025-04-16": {
+    "day": 1397,
+    "solution": "moral"
+  },
+  "2025-04-17": {
+    "day": 1398,
+    "solution": "stood"
+  },
+  "2025-04-18": {
+    "day": 1399,
+    "solution": "dirge"
+  },
+  "2025-04-19": {
+    "day": 1400,
+    "solution": "inbox"
+  },
+  "2025-04-20": {
+    "day": 1401,
+    "solution": "patch"
+  },
+  "2025-04-21": {
+    "day": 1402,
+    "solution": "spate"
+  },
+  "2025-04-22": {
+    "day": 1403,
+    "solution": "artsy"
+  },
+  "2025-04-23": {
+    "day": 1404,
+    "solution": "ozone"
+  },
+  "2025-04-24": {
+    "day": 1405,
+    "solution": "genie"
+  },
+  "2025-04-25": {
+    "day": 1406,
+    "solution": "known"
+  },
+  "2025-04-26": {
+    "day": 1407,
+    "solution": "clash"
+  },
+  "2025-04-27": {
+    "day": 1408,
+    "solution": "weedy"
+  },
+  "2025-04-28": {
+    "day": 1409,
+    "solution": "dummy"
+  },
+  "2025-04-29": {
+    "day": 1410,
+    "solution": "bliss"
+  },
+  "2025-04-30": {
+    "day": 1411,
+    "solution": "idler"
+  },
+  "2025-05-01": {
+    "day": 1412,
+    "solution": "adept"
+  },
+  "2025-05-02": {
+    "day": 1413,
+    "solution": "whose"
+  },
+  "2025-05-03": {
+    "day": 1414,
+    "solution": "patsy"
+  },
+  "2025-05-04": {
+    "day": 1415,
+    "solution": "trout"
+  },
+  "2025-05-05": {
+    "day": 1416,
+    "solution": "shush"
+  },
+  "2025-05-06": {
+    "day": 1417,
+    "solution": "suite"
+  },
+  "2025-05-07": {
+    "day": 1418,
+    "solution": "macho"
+  },
+  "2025-05-08": {
+    "day": 1419,
+    "solution": "balmy"
+  },
+  "2025-05-09": {
+    "day": 1420,
+    "solution": "tripe"
+  },
+  "2025-05-10": {
+    "day": 1421,
+    "solution": "yeast"
+  },
+  "2025-05-11": {
+    "day": 1422,
+    "solution": "dowel"
+  },
+  "2025-05-12": {
+    "day": 1423,
+    "solution": "bicep"
+  },
+  "2025-05-13": {
+    "day": 1424,
+    "solution": "aware"
+  },
+  "2025-05-14": {
+    "day": 1425,
+    "solution": "bongo"
+  },
+  "2025-05-15": {
+    "day": 1426,
+    "solution": "eager"
+  },
+  "2025-05-16": {
+    "day": 1427,
+    "solution": "fifth"
+  },
+  "2025-05-17": {
+    "day": 1428,
+    "solution": "grown"
+  },
+  "2025-05-18": {
+    "day": 1429,
+    "solution": "livid"
+  },
+  "2025-05-19": {
+    "day": 1430,
+    "solution": "pitch"
+  },
+  "2025-05-20": {
+    "day": 1431,
+    "solution": "borne"
+  },
+  "2025-05-21": {
+    "day": 1432,
+    "solution": "alarm"
+  },
+  "2025-05-22": {
+    "day": 1433,
+    "solution": "folio"
+  },
+  "2025-05-23": {
+    "day": 1434,
+    "solution": "shuck"
+  },
+  "2025-05-24": {
+    "day": 1435,
+    "solution": "suede"
+  },
+  "2025-05-25": {
+    "day": 1436,
+    "solution": "grift"
+  },
+  "2025-05-26": {
+    "day": 1437,
+    "solution": "drone"
+  },
+  "2025-05-27": {
+    "day": 1438,
+    "solution": "sport"
+  },
+  "2025-05-28": {
+    "day": 1439,
+    "solution": "polar"
+  },
+  "2025-05-29": {
+    "day": 1440,
+    "solution": "quash"
+  },
+  "2025-05-30": {
+    "day": 1441,
+    "solution": "idiom"
+  },
+  "2025-05-31": {
+    "day": 1442,
+    "solution": "habit"
+  },
+  "2025-06-01": {
+    "day": 1443,
+    "solution": "rough"
+  },
+  "2025-06-02": {
+    "day": 1444,
+    "solution": "preen"
+  },
+  "2025-06-03": {
+    "day": 1445,
+    "solution": "admin"
+  },
+  "2025-06-04": {
+    "day": 1446,
+    "solution": "cease"
+  },
+  "2025-06-05": {
+    "day": 1447,
+    "solution": "datum"
+  },
+  "2025-06-06": {
+    "day": 1448,
+    "solution": "edify"
+  },
+  "2025-06-07": {
+    "day": 1449,
+    "solution": "reuse"
+  },
+  "2025-06-08": {
+    "day": 1450,
+    "solution": "lease"
+  },
+  "2025-06-09": {
+    "day": 1451,
+    "solution": "board"
+  },
+  "2025-06-10": {
+    "day": 1452,
+    "solution": "taffy"
+  },
+  "2025-06-11": {
+    "day": 1453,
+    "solution": "plaid"
+  },
+  "2025-06-12": {
+    "day": 1454,
+    "solution": "vixen"
+  },
+  "2025-06-13": {
+    "day": 1455,
+    "solution": "bilge"
+  },
+  "2025-06-14": {
+    "day": 1456,
+    "solution": "ghost"
+  },
+  "2025-06-15": {
+    "day": 1457,
+    "solution": "quail"
+  },
+  "2025-06-16": {
+    "day": 1458,
+    "solution": "petty"
+  },
+  "2025-06-17": {
+    "day": 1459,
+    "solution": "prank"
+  },
+  "2025-06-18": {
+    "day": 1460,
+    "solution": "munch"
+  },
+  "2025-06-19": {
+    "day": 1461,
+    "solution": "curio"
+  },
+  "2025-06-20": {
+    "day": 1462,
+    "solution": "taupe"
+  },
+  "2025-06-21": {
+    "day": 1463,
+    "solution": "glade"
+  },
+  "2025-06-22": {
+    "day": 1464,
+    "solution": "thrum"
+  },
+  "2025-06-23": {
+    "day": 1465,
+    "solution": "oddly"
+  },
+  "2025-06-24": {
+    "day": 1466,
+    "solution": "elite"
+  },
+  "2025-06-25": {
+    "day": 1467,
+    "solution": "comfy"
+  },
+  "2025-06-26": {
+    "day": 1468,
+    "solution": "offer"
+  },
+  "2025-06-27": {
+    "day": 1469,
+    "solution": "plain"
+  },
+  "2025-06-28": {
+    "day": 1470,
+    "solution": "stump"
+  },
+  "2025-06-29": {
+    "day": 1471,
+    "solution": "witty"
+  },
+  "2025-06-30": {
+    "day": 1472,
+    "solution": "blink"
+  },
+  "2025-07-01": {
+    "day": 1473,
+    "solution": "moldy"
+  },
+  "2025-07-02": {
+    "day": 1474,
+    "solution": "incur"
+  },
+  "2025-07-03": {
+    "day": 1475,
+    "solution": "poppy"
+  },
+  "2025-07-04": {
+    "day": 1476,
+    "solution": "curve"
+  },
+  "2025-07-05": {
+    "day": 1477,
+    "solution": "baler"
+  },
+  "2025-07-06": {
+    "day": 1478,
+    "solution": "atria"
+  },
+  "2025-07-07": {
+    "day": 1479,
+    "solution": "stilt"
+  },
+  "2025-07-08": {
+    "day": 1480,
+    "solution": "dread"
+  },
+  "2025-07-09": {
+    "day": 1481,
+    "solution": "novel"
+  },
+  "2025-07-10": {
+    "day": 1482,
+    "solution": "jumpy"
+  },
+  "2025-07-11": {
+    "day": 1483,
+    "solution": "brand"
+  },
+  "2025-07-12": {
+    "day": 1484,
+    "solution": "exile"
+  },
+  "2025-07-13": {
+    "day": 1485,
+    "solution": "gnome"
+  },
+  "2025-07-14": {
+    "day": 1486,
+    "solution": "undid"
+  },
+  "2025-07-15": {
+    "day": 1487,
+    "solution": "foist"
+  },
+  "2025-07-16": {
+    "day": 1488,
+    "solution": "nervy"
+  },
+  "2025-07-17": {
+    "day": 1489,
+    "solution": "modal"
+  },
+  "2025-07-18": {
+    "day": 1490,
+    "solution": "loris"
+  },
+  "2025-07-19": {
+    "day": 1491,
+    "solution": "sword"
+  },
+  "2025-07-20": {
+    "day": 1492,
+    "solution": "blank"
+  },
+  "2025-07-21": {
+    "day": 1493,
+    "solution": "tizzy"
+  },
+  "2025-07-22": {
+    "day": 1494,
+    "solution": "burnt"
+  },
+  "2025-07-23": {
+    "day": 1495,
+    "solution": "water"
+  },
+  "2025-07-24": {
+    "day": 1496,
+    "solution": "quake"
+  },
+  "2025-07-25": {
+    "day": 1497,
+    "solution": "gofer"
+  },
+  "2025-07-26": {
+    "day": 1498,
+    "solution": "haunt"
+  },
+  "2025-07-27": {
+    "day": 1499,
+    "solution": "whole"
+  },
+  "2025-07-28": {
+    "day": 1500,
+    "solution": "savvy"
+  },
+  "2025-07-29": {
+    "day": 1501,
+    "solution": "omega"
+  },
+  "2025-07-30": {
+    "day": 1502,
+    "solution": "assay"
+  },
+  "2025-07-31": {
+    "day": 1503,
+    "solution": "frill"
+  },
+  "2025-08-01": {
+    "day": 1504,
+    "solution": "banjo"
+  },
+  "2025-08-02": {
+    "day": 1505,
+    "solution": "daunt"
+  },
+  "2025-08-03": {
+    "day": 1506,
+    "solution": "lumpy"
+  },
+  "2025-08-04": {
+    "day": 1507,
+    "solution": "rigid"
+  },
+  "2025-08-05": {
+    "day": 1508,
+    "solution": "stork"
+  },
+  "2025-08-06": {
+    "day": 1509,
+    "solution": "groan"
+  },
+  "2025-08-07": {
+    "day": 1510,
+    "solution": "coral"
+  },
+  "2025-08-08": {
+    "day": 1511,
+    "solution": "imbue"
+  },
+  "2025-08-09": {
+    "day": 1512,
+    "solution": "nasal"
+  },
+  "2025-08-10": {
+    "day": 1513,
+    "solution": "minty"
+  },
+  "2025-08-11": {
+    "day": 1514,
+    "solution": "south"
+  },
+  "2025-08-12": {
+    "day": 1515,
+    "solution": "nomad"
+  },
+  "2025-08-13": {
+    "day": 1516,
+    "solution": "kefir"
+  },
+  "2025-08-14": {
+    "day": 1517,
+    "solution": "knell"
+  },
+  "2025-08-15": {
+    "day": 1518,
+    "solution": "level"
+  },
+  "2025-08-16": {
+    "day": 1519,
+    "solution": "matte"
+  },
+  "2025-08-17": {
+    "day": 1520,
+    "solution": "lousy"
+  },
+  "2025-08-18": {
+    "day": 1521,
+    "solution": "issue"
+  },
+  "2025-08-19": {
+    "day": 1522,
+    "solution": "rowdy"
+  },
+  "2025-08-20": {
+    "day": 1523,
+    "solution": "llama"
+  },
+  "2025-08-21": {
+    "day": 1524,
+    "solution": "extol"
+  },
+  "2025-08-22": {
+    "day": 1525,
+    "solution": "ratty"
+  },
+  "2025-08-23": {
+    "day": 1526,
+    "solution": "union"
+  },
+  "2025-08-24": {
+    "day": 1527,
+    "solution": "spore"
+  },
+  "2025-08-25": {
+    "day": 1528,
+    "solution": "mirth"
+  },
+  "2025-08-26": {
+    "day": 1529,
+    "solution": "annex"
+  },
+  "2025-08-27": {
+    "day": 1530,
+    "solution": "tower"
+  },
+  "2025-08-28": {
+    "day": 1531,
+    "solution": "split"
+  },
+  "2025-08-29": {
+    "day": 1532,
+    "solution": "graft"
+  },
+  "2025-08-30": {
+    "day": 1533,
+    "solution": "elate"
+  },
+  "2025-08-31": {
+    "day": 1534,
+    "solution": "petal"
+  },
+  "2025-09-01": {
+    "day": 1535,
+    "solution": "least"
+  },
+  "2025-09-02": {
+    "day": 1536,
+    "solution": "might"
+  },
+  "2025-09-03": {
+    "day": 1537,
+    "solution": "fetch"
+  },
+  "2025-09-04": {
+    "day": 1538,
+    "solution": "blend"
+  },
+  "2025-09-05": {
+    "day": 1539,
+    "solution": "drift"
+  },
+  "2025-09-06": {
+    "day": 1540,
+    "solution": "bulge"
+  },
+  "2025-09-07": {
+    "day": 1541,
+    "solution": "tenor"
+  },
+  "2025-09-08": {
+    "day": 1542,
+    "solution": "chirp"
+  },
+  "2025-09-09": {
+    "day": 1543,
+    "solution": "trick"
+  },
+  "2025-09-10": {
+    "day": 1544,
+    "solution": "pouty"
+  },
+  "2025-09-11": {
+    "day": 1545,
+    "solution": "chair"
+  },
+  "2025-09-12": {
+    "day": 1546,
+    "solution": "throb"
+  },
+  "2025-09-13": {
+    "day": 1547,
+    "solution": "nadir"
+  },
+  "2025-09-14": {
+    "day": 1548,
+    "solution": "noisy"
+  },
+  "2025-09-15": {
+    "day": 1549,
+    "solution": "along"
+  },
+  "2025-09-16": {
+    "day": 1550,
+    "solution": "lefty"
+  },
+  "2025-09-17": {
+    "day": 1551,
+    "solution": "teeth"
+  },
+  "2025-09-18": {
+    "day": 1552,
+    "solution": "knife"
+  },
+  "2025-09-19": {
+    "day": 1553,
+    "solution": "later"
+  },
+  "2025-09-20": {
+    "day": 1554,
+    "solution": "defer"
+  },
+  "2025-09-21": {
+    "day": 1555,
+    "solution": "coven"
+  },
+  "2025-09-22": {
+    "day": 1556,
+    "solution": "quill"
+  },
+  "2025-09-23": {
+    "day": 1557,
+    "solution": "mouth"
+  },
+  "2025-09-24": {
+    "day": 1558,
+    "solution": "blunt"
+  },
+  "2025-09-25": {
+    "day": 1559,
+    "solution": "drape"
+  },
+  "2025-09-26": {
+    "day": 1560,
+    "solution": "dally"
+  },
+  "2025-09-27": {
+    "day": 1561,
+    "solution": "fritz"
+  },
+  "2025-09-28": {
+    "day": 1562,
+    "solution": "gooey"
+  },
+  "2025-09-29": {
+    "day": 1563,
+    "solution": "civil"
+  },
+  "2025-09-30": {
+    "day": 1564,
+    "solution": "geese"
+  },
+  "2025-10-01": {
+    "day": 1565,
+    "solution": "spoil"
+  },
+  "2025-10-02": {
+    "day": 1566,
+    "solution": "width"
+  },
+  "2025-10-03": {
+    "day": 1567,
+    "solution": "spasm"
+  },
+  "2025-10-04": {
+    "day": 1568,
+    "solution": "relay"
+  },
+  "2025-10-05": {
+    "day": 1569,
+    "solution": "plane"
+  },
+  "2025-10-06": {
+    "day": 1570,
+    "solution": "amuse"
+  },
+  "2025-10-07": {
+    "day": 1571,
+    "solution": "nylon"
+  },
+  "2025-10-08": {
+    "day": 1572,
+    "solution": "annoy"
+  },
+  "2025-10-09": {
+    "day": 1573,
+    "solution": "hardy"
+  },
+  "2025-10-10": {
+    "day": 1574,
+    "solution": "lever"
+  },
+  "2025-10-11": {
+    "day": 1575,
+    "solution": "stack"
+  },
+  "2025-10-12": {
+    "day": 1576,
+    "solution": "wound"
+  },
+  "2025-10-13": {
+    "day": 1577,
+    "solution": "beard"
+  },
+  "2025-10-14": {
+    "day": 1578,
+    "solution": "forum"
+  },
+  "2025-10-15": {
+    "day": 1579,
+    "solution": "spoof"
+  },
+  "2025-10-16": {
+    "day": 1580,
+    "solution": "catty"
+  },
+  "2025-10-17": {
+    "day": 1581,
+    "solution": "gross"
+  },
+  "2025-10-18": {
+    "day": 1582,
+    "solution": "haven"
+  },
+  "2025-10-19": {
+    "day": 1583,
+    "solution": "ideal"
+  },
+  "2025-10-20": {
+    "day": 1584,
+    "solution": "limbo"
+  },
+  "2025-10-21": {
+    "day": 1585,
+    "solution": "detox"
+  },
+  "2025-10-22": {
+    "day": 1586,
+    "solution": "stunt"
+  },
+  "2025-10-23": {
+    "day": 1587,
+    "solution": "drill"
+  },
+  "2025-10-24": {
+    "day": 1588,
+    "solution": "tuber"
+  },
+  "2025-10-25": {
+    "day": 1589,
+    "solution": "gauge"
+  },
+  "2025-10-26": {
+    "day": 1590,
+    "solution": "plump"
+  },
+  "2025-10-27": {
+    "day": 1591,
+    "solution": "fetid"
+  },
+  "2025-10-28": {
+    "day": 1592,
+    "solution": "holly"
+  },
+  "2025-10-29": {
+    "day": 1593,
+    "solution": "glare"
+  },
+  "2025-10-30": {
+    "day": 1594,
+    "solution": "lathe"
+  },
+  "2025-10-31": {
+    "day": 1595,
+    "solution": "abhor"
+  },
+  "2025-11-01": {
+    "day": 1596,
+    "solution": "motel"
+  },
+  "2025-11-02": {
+    "day": 1597,
+    "solution": "rabid"
+  },
+  "2025-11-03": {
+    "day": 1598,
+    "solution": "awoke"
+  },
+  "2025-11-04": {
+    "day": 1599,
+    "solution": "venue"
+  },
+  "2025-11-05": {
+    "day": 1600,
+    "solution": "short"
+  },
+  "2025-11-06": {
+    "day": 1601,
+    "solution": "guise"
+  },
+  "2025-11-07": {
+    "day": 1602,
+    "solution": "peril"
+  },
+  "2025-11-08": {
+    "day": 1603,
+    "solution": "arise"
+  },
+  "2025-11-09": {
+    "day": 1604,
+    "solution": "fugue"
+  },
+  "2025-11-10": {
+    "day": 1605,
+    "solution": "tabby"
+  },
+  "2025-11-11": {
+    "day": 1606,
+    "solution": "gizmo"
+  },
+  "2025-11-12": {
+    "day": 1607,
+    "solution": "deuce"
+  },
+  "2025-11-13": {
+    "day": 1608,
+    "solution": "tinge"
+  },
+  "2025-11-14": {
+    "day": 1609,
+    "solution": "lurid"
+  },
+  "2025-11-15": {
+    "day": 1610,
+    "solution": "clung"
+  },
+  "2025-11-16": {
+    "day": 1611,
+    "solution": "wield"
+  },
+  "2025-11-17": {
+    "day": 1612,
+    "solution": "clamp"
+  },
+  "2025-11-18": {
+    "day": 1613,
+    "solution": "opine"
+  },
+  "2025-11-19": {
+    "day": 1614,
+    "solution": "maker"
+  },
+  "2025-11-20": {
+    "day": 1615,
+    "solution": "grave"
+  },
+  "2025-11-21": {
+    "day": 1616,
+    "solution": "vowel"
+  },
+  "2025-11-22": {
+    "day": 1617,
+    "solution": "thick"
+  },
+  "2025-11-23": {
+    "day": 1618,
+    "solution": "bunny"
+  },
+  "2025-11-24": {
+    "day": 1619,
+    "solution": "dough"
+  },
+  "2025-11-25": {
+    "day": 1620,
+    "solution": "plead"
+  },
+  "2025-11-26": {
+    "day": 1621,
+    "solution": "hovel"
+  },
+  "2025-11-27": {
+    "day": 1622,
+    "solution": "remit"
+  },
+  "2025-11-28": {
+    "day": 1623,
+    "solution": "colic"
+  },
+  "2025-11-29": {
+    "day": 1624,
+    "solution": "gruff"
+  },
+  "2025-11-30": {
+    "day": 1625,
+    "solution": "muggy"
+  },
+  "2025-12-01": {
+    "day": 1626,
+    "solution": "leach"
+  },
+  "2025-12-02": {
+    "day": 1627,
+    "solution": "cacti"
+  },
+  "2025-12-03": {
+    "day": 1628,
+    "solution": "haste"
+  },
+  "2025-12-04": {
+    "day": 1629,
+    "solution": "tulip"
+  },
+  "2025-12-05": {
+    "day": 1630,
+    "solution": "among"
+  },
+  "2025-12-06": {
+    "day": 1631,
+    "solution": "waist"
+  },
+  "2025-12-07": {
+    "day": 1632,
+    "solution": "flute"
+  },
+  "2025-12-08": {
+    "day": 1633,
+    "solution": "gravy"
+  },
+  "2025-12-09": {
+    "day": 1634,
+    "solution": "snide"
+  },
+  "2025-12-10": {
+    "day": 1635,
+    "solution": "erase"
+  },
+  "2025-12-11": {
+    "day": 1636,
+    "solution": "guess"
+  },
+  "2025-12-12": {
+    "day": 1637,
+    "solution": "truck"
+  },
+  "2025-12-13": {
+    "day": 1638,
+    "solution": "miser"
+  },
+  "2025-12-14": {
+    "day": 1639,
+    "solution": "swing"
+  },
+  "2025-12-15": {
+    "day": 1640,
+    "solution": "dodgy"
+  },
+  "2025-12-16": {
+    "day": 1641,
+    "solution": "segue"
+  },
+  "2025-12-17": {
+    "day": 1642,
+    "solution": "grass"
+  },
+  "2025-12-18": {
+    "day": 1643,
+    "solution": "rugby"
+  },
+  "2025-12-19": {
+    "day": 1644,
+    "solution": "myrrh"
+  },
+  "2025-12-20": {
+    "day": 1645,
+    "solution": "white"
+  },
+  "2025-12-21": {
+    "day": 1646,
+    "solution": "quilt"
+  },
+  "2025-12-22": {
+    "day": 1647,
+    "solution": "conch"
+  },
+  "2025-12-23": {
+    "day": 1648,
+    "solution": "glint"
+  },
+  "2025-12-24": {
+    "day": 1649,
+    "solution": "spool"
+  },
+  "2025-12-25": {
+    "day": 1650,
+    "solution": "prism"
+  },
+  "2025-12-26": {
+    "day": 1651,
+    "solution": "speed"
+  },
+  "2025-12-27": {
+    "day": 1652,
+    "solution": "batch"
+  },
+  "2025-12-28": {
+    "day": 1653,
+    "solution": "abbot"
+  },
+  "2025-12-29": {
+    "day": 1654,
+    "solution": "fruit"
+  },
+  "2025-12-30": {
+    "day": 1655,
+    "solution": "decor"
+  },
+  "2025-12-31": {
+    "day": 1656,
+    "solution": "siren"
+  },
+  "2026-01-01": {
+    "day": 1657,
+    "solution": "fable"
+  },
+  "2026-01-02": {
+    "day": 1658,
+    "solution": "proof"
+  },
+  "2026-01-03": {
+    "day": 1659,
+    "solution": "sitar"
+  },
+  "2026-01-04": {
+    "day": 1660,
+    "solution": "posse"
+  },
+  "2026-01-05": {
+    "day": 1661,
+    "solution": "filly"
+  },
+  "2026-01-06": {
+    "day": 1662,
+    "solution": "oomph"
+  },
+  "2026-01-07": {
+    "day": 1663,
+    "solution": "pecan"
+  },
+  "2026-01-08": {
+    "day": 1664,
+    "solution": "blast"
+  },
+  "2026-01-09": {
+    "day": 1665,
+    "solution": "eight"
+  },
+  "2026-01-10": {
+    "day": 1666,
+    "solution": "manic"
+  },
+  "2026-01-11": {
+    "day": 1667,
+    "solution": "quark"
+  },
+  "2026-01-12": {
+    "day": 1668,
+    "solution": "trial"
+  },
+  "2026-01-13": {
+    "day": 1669,
+    "solution": "gumbo"
+  },
+  "2026-01-14": {
+    "day": 1670,
+    "solution": "avoid"
+  },
+  "2026-01-15": {
+    "day": 1671,
+    "solution": "chasm"
+  },
+  "2026-01-16": {
+    "day": 1672,
+    "solution": "racer"
+  },
+  "2026-01-17": {
+    "day": 1673,
+    "solution": "fiery"
+  },
+  "2026-01-18": {
+    "day": 1674,
+    "solution": "sumac"
+  },
+  "2026-01-19": {
+    "day": 1675,
+    "solution": "waxen"
+  },
+  "2026-01-20": {
+    "day": 1676,
+    "solution": "sully"
+  },
+  "2026-01-21": {
+    "day": 1677,
+    "solution": "cubic"
+  },
+  "2026-01-22": {
+    "day": 1678,
+    "solution": "clink"
+  },
+  "2026-01-23": {
+    "day": 1679,
+    "solution": "baron"
+  },
+  "2026-01-24": {
+    "day": 1680,
+    "solution": "cliff"
+  },
+  "2026-01-25": {
+    "day": 1681,
+    "solution": "strut"
+  },
+  "2026-01-26": {
+    "day": 1682,
+    "solution": "freak"
+  },
+  "2026-01-27": {
+    "day": 1683,
+    "solution": "dusky"
+  },
+  "2026-01-28": {
+    "day": 1684,
+    "solution": "cruel"
+  },
+  "2026-01-29": {
+    "day": 1685,
+    "solution": "flaky"
+  },
+  "2026-01-30": {
+    "day": 1686,
+    "solution": "jumbo"
+  },
+  "2026-01-31": {
+    "day": 1687,
+    "solution": "allot"
+  },
+  "2026-02-01": {
+    "day": 1688,
+    "solution": "spiny"
+  },
+  "2026-02-02": {
+    "day": 1689,
+    "solution": "cigar"
+  },
+  "2026-02-03": {
+    "day": 1690,
+    "solution": "weigh"
+  },
+  "2026-02-04": {
+    "day": 1691,
+    "solution": "chide"
+  },
+  "2026-02-05": {
+    "day": 1692,
+    "solution": "swoop"
+  },
+  "2026-02-06": {
+    "day": 1693,
+    "solution": "gavel"
+  },
+  "2026-02-07": {
+    "day": 1694,
+    "solution": "bleat"
+  },
+  "2026-02-08": {
+    "day": 1695,
+    "solution": "embed"
+  },
+  "2026-02-09": {
+    "day": 1696,
+    "solution": "cello"
+  },
+  "2026-02-10": {
+    "day": 1697,
+    "solution": "scene"
+  },
+  "2026-02-11": {
+    "day": 1698,
+    "solution": "vegan"
+  },
+  "2026-02-12": {
+    "day": 1699,
+    "solution": "surge"
+  },
+  "2026-02-13": {
+    "day": 1700,
+    "solution": "mooch"
+  },
+  "2026-02-14": {
+    "day": 1701,
+    "solution": "bloom"
+  },
   "2026-02-15": {
     "day": 1702,
     "solution": "skull"

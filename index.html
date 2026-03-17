@@ -294,6 +294,43 @@ header h1 {
 .toggle input:checked + .slider::before { transform: translateX(18px); }
 .toggle input:disabled + .slider { opacity: 0.5; cursor: not-allowed; }
 
+/* Date picker */
+#date-picker-row { position: relative; }
+#date-input {
+  background: var(--dark-grey);
+  color: var(--text);
+  border: 1px solid #555;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  -webkit-appearance: none;
+  color-scheme: dark;
+}
+#date-input::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
+#today-btn {
+  background: var(--green);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 8px;
+  display: none;
+}
+#today-btn.show { display: inline-block; }
+#date-subtitle {
+  font-size: 12px;
+  color: var(--green);
+  text-align: center;
+  padding: 4px 0 0;
+  display: none;
+}
+#date-subtitle.show { display: block; }
+
 /* History section in stats */
 #history-section { margin-top: 16px; border-top: 1px solid var(--dark-grey); padding-top: 12px; }
 #history-section h3 { font-size: 14px; color: #aaa; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
@@ -324,6 +361,7 @@ header h1 {
     <h1>Wordle</h1>
     <button id="settings-btn" onclick="openSettings()">⚙️</button>
   </header>
+  <div id="date-subtitle"></div>
   <div id="toast-container"></div>
   <div id="board-container"><div id="board"></div></div>
   <div id="keyboard"></div>
@@ -363,6 +401,16 @@ header h1 {
         <input type="checkbox" id="hard-mode-toggle" onchange="toggleHardMode(this.checked)">
         <span class="slider"></span>
       </label>
+    </div>
+    <div class="setting-row" id="date-picker-row">
+      <div class="setting-info">
+        <div class="setting-name">Play a Date</div>
+        <div class="setting-desc">Pick any past date to play that day's puzzle</div>
+      </div>
+      <div>
+        <input type="date" id="date-input" onchange="changeDate(this.value)">
+        <button id="today-btn" onclick="backToToday()">Today</button>
+      </div>
     </div>
     <div class="setting-row">
       <div class="setting-info">
@@ -425,6 +473,8 @@ let gameOver = false;
 let boardState = [];
 let letterStates = {};
 let hardMode = false;
+let selectedDate = null; // null = today, else 'YYYY-MM-DD'
+let historyData = null; // loaded from words-history.json
 
 // ─── Daily word selection ───
 function getDayNumber() {
@@ -433,24 +483,42 @@ function getDayNumber() {
   return Math.floor((today - WORDLE_EPOCH) / 86400000);
 }
 
+function getActiveDateStr() {
+  if (selectedDate) return selectedDate;
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
 function getTodayDateStr() {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
 
-async function fetchNYTWord() {
+async function fetchWordData() {
+  // Load both words.json (current week) and words-history.json (archive)
   try {
-    const resp = await fetch('words.json?t=' + Date.now());
-    if (!resp.ok) throw new Error('fetch failed');
-    NYT_WORDS = await resp.json();
-    const today = getTodayDateStr();
-    if (NYT_WORDS[today] && NYT_WORDS[today].solution) {
-      const word = NYT_WORDS[today].solution.toLowerCase();
-      VALID_GUESSES.add(word); // ensure today's word is always valid
-      return word.toUpperCase();
-    }
+    const [resp1, resp2] = await Promise.all([
+      fetch('words.json?t=' + Date.now()).catch(() => null),
+      fetch('words-history.json?t=' + Date.now()).catch(() => null)
+    ]);
+    if (resp1 && resp1.ok) NYT_WORDS = await resp1.json();
+    if (resp2 && resp2.ok) historyData = await resp2.json();
   } catch (e) {
-    console.warn('Could not fetch NYT words, using fallback:', e);
+    console.warn('Could not fetch word data:', e);
+  }
+}
+
+function getWordForDate(dateStr) {
+  // Check current week data first, then history
+  if (NYT_WORDS && NYT_WORDS[dateStr] && NYT_WORDS[dateStr].solution) {
+    const word = NYT_WORDS[dateStr].solution.toLowerCase();
+    VALID_GUESSES.add(word);
+    return word.toUpperCase();
+  }
+  if (historyData && historyData[dateStr] && historyData[dateStr].solution) {
+    const word = historyData[dateStr].solution.toLowerCase();
+    VALID_GUESSES.add(word);
+    return word.toUpperCase();
   }
   return null;
 }
@@ -460,9 +528,13 @@ function getDailyWordFallback() {
   return FALLBACK_ANSWERS[day % FALLBACK_ANSWERS.length].toUpperCase();
 }
 
+function getGameKey() {
+  const ds = getActiveDateStr();
+  return `wordle-${ds}`;
+}
+
 function getTodayKey() {
-  const d = new Date();
-  return `wordle-${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  return getGameKey();
 }
 
 function getDateFromKey(key) {
@@ -861,11 +933,107 @@ function updateTimer() {
 
 // ─── Settings Modal ───
 function openSettings() {
-  const dayNum = (NYT_WORDS && NYT_WORDS[getTodayDateStr()]) ? NYT_WORDS[getTodayDateStr()].day : getDayNumber();
+  const ds = getActiveDateStr();
+  const entry = (NYT_WORDS && NYT_WORDS[ds]) || (historyData && historyData[ds]);
+  const dayNum = entry ? entry.day : getDayNumber();
   document.getElementById('day-number-label').textContent = `Wordle #${dayNum}`;
   document.getElementById('hard-mode-toggle').checked = hardMode;
+  document.getElementById('date-input').value = ds;
+  document.getElementById('date-input').max = getTodayDateStr();
+  document.getElementById('date-input').min = '2021-06-19';
+  document.getElementById('today-btn').classList.toggle('show', !!selectedDate);
   updateHardModeToggle();
   document.getElementById('settings-modal').classList.add('show');
+}
+
+// ─── Date switching ───
+function changeDate(dateStr) {
+  if (!dateStr) return;
+  const todayStr = getTodayDateStr();
+  if (dateStr === todayStr) {
+    backToToday();
+    return;
+  }
+  // Check if we have the word for this date
+  const word = getWordForDate(dateStr);
+  if (!word) {
+    showToast('No puzzle available for this date', 2000);
+    return;
+  }
+  selectedDate = dateStr;
+  resetGameState();
+  targetWord = word;
+
+  // Show date subtitle
+  const sub = document.getElementById('date-subtitle');
+  const d = new Date(dateStr + 'T12:00:00');
+  sub.textContent = d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+  sub.classList.add('show');
+  document.getElementById('today-btn').classList.add('show');
+
+  buildBoard();
+  buildKeyboard();
+  restoreSavedGame();
+  document.getElementById('settings-modal').classList.remove('show');
+}
+
+function backToToday() {
+  selectedDate = null;
+  resetGameState();
+  const word = getWordForDate(getTodayDateStr());
+  targetWord = word || getDailyWordFallback();
+
+  document.getElementById('date-subtitle').classList.remove('show');
+  document.getElementById('today-btn').classList.remove('show');
+
+  buildBoard();
+  buildKeyboard();
+  restoreSavedGame();
+  document.getElementById('settings-modal').classList.remove('show');
+}
+
+function resetGameState() {
+  currentRow = 0;
+  currentCol = 0;
+  currentGuess = '';
+  gameOver = false;
+  boardState = [];
+  letterStates = {};
+}
+
+function restoreSavedGame() {
+  const saved = loadGame();
+  if (saved) {
+    boardState = saved.boardState || [];
+    currentRow = saved.currentRow;
+    currentCol = saved.currentCol;
+    currentGuess = saved.currentGuess;
+    gameOver = saved.gameOver;
+    letterStates = saved.letterStates || {};
+    if (saved.hardMode !== undefined) hardMode = saved.hardMode;
+    document.getElementById('hard-badge').classList.toggle('show', hardMode);
+    document.getElementById('hard-mode-toggle').checked = hardMode;
+
+    boardState.forEach((entry, r) => {
+      for (let c = 0; c < WORD_LENGTH; c++) {
+        const tile = document.getElementById(`tile-${r}-${c}`);
+        tile.textContent = entry.guess[c];
+        tile.classList.add('filled', entry.result[c]);
+      }
+    });
+    Object.entries(letterStates).forEach(([letter, state]) => {
+      const key = document.getElementById(`key-${letter}`);
+      if (key) key.classList.add(state);
+    });
+
+    if (gameOver) {
+      setTimeout(() => showStatsModal(loadStats(),
+        boardState.length <= MAX_GUESSES && boardState[boardState.length-1]?.result.every(r => r === 'correct')
+          ? boardState.length - 1 : -1
+      ), 500);
+    }
+  }
+  updateHardModeToggle();
 }
 
 // ─── Share ───
@@ -902,9 +1070,13 @@ document.querySelectorAll('.modal-overlay').forEach(overlay => {
 
 // ─── Init ───
 async function init() {
-  // Try to get today's word from NYT-synced data first
-  const nytWord = await fetchNYTWord();
+  // Fetch all word data (current week + history)
+  await fetchWordData();
+
+  // Get today's word
+  const nytWord = getWordForDate(getTodayDateStr());
   targetWord = nytWord || getDailyWordFallback();
+
   buildBoard();
   buildKeyboard();
 
@@ -914,41 +1086,7 @@ async function init() {
   document.getElementById('hard-badge').classList.toggle('show', hardMode);
   document.getElementById('hard-mode-toggle').checked = hardMode;
 
-  const saved = loadGame();
-  if (saved) {
-    boardState = saved.boardState || [];
-    currentRow = saved.currentRow;
-    currentCol = saved.currentCol;
-    currentGuess = saved.currentGuess;
-    gameOver = saved.gameOver;
-    letterStates = saved.letterStates || {};
-    if (saved.hardMode !== undefined) hardMode = saved.hardMode;
-    document.getElementById('hard-badge').classList.toggle('show', hardMode);
-    document.getElementById('hard-mode-toggle').checked = hardMode;
-
-    // Restore tiles
-    boardState.forEach((entry, r) => {
-      for (let c = 0; c < WORD_LENGTH; c++) {
-        const tile = document.getElementById(`tile-${r}-${c}`);
-        tile.textContent = entry.guess[c];
-        tile.classList.add('filled', entry.result[c]);
-      }
-    });
-    // Restore keyboard
-    Object.entries(letterStates).forEach(([letter, state]) => {
-      const key = document.getElementById(`key-${letter}`);
-      if (key) key.classList.add(state);
-    });
-
-    if (gameOver) {
-      setTimeout(() => showStatsModal(loadStats(),
-        boardState.length <= MAX_GUESSES && boardState[boardState.length-1]?.result.every(r => r === 'correct')
-          ? boardState.length - 1 : -1
-      ), 500);
-    }
-  }
-
-  updateHardModeToggle();
+  restoreSavedGame();
 }
 
 init();
