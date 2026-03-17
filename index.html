@@ -636,23 +636,46 @@ function updateHardModeToggle() {
 function validateHardMode(guess) {
   if (!hardMode || boardState.length === 0) return null;
 
+  // Build cumulative constraints from all previous guesses
+  const mustBeAt = {}; // position -> letter (green)
+  const mustInclude = {}; // letter -> Set of positions where it CAN'T be (yellow)
+
   for (const prev of boardState) {
     for (let i = 0; i < WORD_LENGTH; i++) {
       const letter = prev.guess[i];
       const state = prev.result[i];
 
       if (state === 'correct') {
-        if (guess[i] !== letter) {
-          return `${ordinal(i+1)} letter must be ${letter}`;
-        }
+        mustBeAt[i] = letter;
       }
       if (state === 'present') {
-        if (!guess.includes(letter)) {
-          return `Guess must contain ${letter}`;
-        }
+        if (!mustInclude[letter]) mustInclude[letter] = new Set();
+        mustInclude[letter].add(i); // can't be at this position
       }
     }
   }
+
+  // Check green constraints
+  for (const [pos, letter] of Object.entries(mustBeAt)) {
+    if (guess[pos] !== letter) {
+      return `${ordinal(Number(pos)+1)} letter must be ${letter}`;
+    }
+  }
+
+  // Check yellow constraints: letter must appear, and not in a previously-yellow position
+  for (const [letter, badPositions] of Object.entries(mustInclude)) {
+    // Skip if this letter is already locked as green somewhere
+    if (!guess.includes(letter)) {
+      return `Guess must contain ${letter}`;
+    }
+    // Check it's not placed back in a known-wrong spot
+    for (const pos of badPositions) {
+      if (guess[pos] === letter && !mustBeAt[pos]) {
+        return `${letter} can't be ${ordinal(pos+1)} letter`;
+      }
+    }
+  }
+
   return null;
 }
 
@@ -758,6 +781,12 @@ function submitGuess() {
   if (!VALID_GUESSES.has(currentGuess.toLowerCase())) {
     shakeRow(currentRow);
     showToast('Not in word list');
+    return;
+  }
+  // Reject duplicate guesses
+  if (boardState.some(prev => prev.guess === currentGuess)) {
+    shakeRow(currentRow);
+    showToast('Already guessed');
     return;
   }
 
