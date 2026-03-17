@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wordle Theme Mockups</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #1a1a1a; color: white; font-family: 'Helvetica Neue', Arial, sans-serif; padding: 20px; }
+h1 { text-align: center; margin-bottom: 30px; font-size: 24px; }
+.mockups { display: flex; flex-wrap: wrap; gap: 30px; justify-content: center; }
+.mockup {
+  width: 340px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.mockup-label {
+  text-align: center;
+  padding: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  color: #aaa;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.m-app {
+  display: flex;
+  flex-direction: column;
+}
+.m-header {
+  text-align: center;
+  padding: 14px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+.m-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 20px;
+}
+.m-row {
+  display: flex;
+  gap: 5px;
+}
+.m-tile {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 2px solid transparent;
+}
+.m-tile.empty {
+  background: transparent;
+}
+.m-kb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 10px 8px 16px;
+}
+.m-kb-row {
+  display: flex;
+  gap: 4px;
+}
+.m-key {
+  height: 40px;
+  min-width: 26px;
+  padding: 0 6px;
+  border: none;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+}
+
+/* ═══════ THEME 1: Jungle Canopy ═══════ */
+.t1 .m-app { background: #1a2e1a; }
+.t1 .m-header { color: #c8d8a0; border-color: #2d4a2d; }
+.t1 .m-tile.empty { border-color: #2d4a2d; }
+.t1 .m-tile.correct { background: #d4760a; border-color: #d4760a; color: white; }
+.t1 .m-tile.present { background: #5a8c3a; border-color: #5a8c3a; color: white; }
+.t1 .m-tile.absent  { background: #4a3728; border-color: #4a3728; color: #c0b0a0; }
+.t1 .m-tile.filled  { border-color: #5a6a4a; color: #c8d8a0; }
+.t1 .m-key { background: #3a5a2a; color: #c8d8a0; }
+.t1 .m-key.correct { background: #d4760a; color: white; }
+.t1 .m-key.present { background: #5a8c3a; color: white; }
+.t1 .m-key.absent  { background: #2a1e16; color: #8a7a6a; }
+
+/* ═══════ THEME 2: Golden Hour ═══════ */
+.t2 .m-app { background: #2a2018; }
+.t2 .m-header { color: #e8c870; border-color: #4a3a28; }
+.t2 .m-tile.empty { border-color: #4a3a28; }
+.t2 .m-tile.correct { background: #d4940a; border-color: #d4940a; color: #1a1008; }
+.t2 .m-tile.present { background: #c87850; border-color: #c87850; color: white; }
+.t2 .m-tile.absent  { background: #5a4a3a; border-color: #5a4a3a; color: #a89888; }
+.t2 .m-tile.filled  { border-color: #6a5a48; color: #e8c870; }
+.t2 .m-key { background: #5a4830; color: #e8c870; }
+.t2 .m-key.correct { background: #d4940a; color: #1a1008; }
+.t2 .m-key.present { background: #c87850; color: white; }
+.t2 .m-key.absent  { background: #2a2018; color: #6a5a48; }
+
+/* ═══════ THEME 3: Playful Pop ═══════ */
+.t3 .m-app { background: #faf5ee; }
+.t3 .m-header { color: #3a3a3a; border-color: #e0d8cc; }
+.t3 .m-tile.empty { border-color: #d0c8b8; }
+.t3 .m-tile.correct { background: #e86820; border-color: #e86820; color: white; }
+.t3 .m-tile.present { background: #f0c830; border-color: #f0c830; color: #3a3a3a; }
+.t3 .m-tile.absent  { background: #bab0a0; border-color: #bab0a0; color: white; }
+.t3 .m-tile.filled  { border-color: #8a8070; color: #3a3a3a; }
+.t3 .m-key { background: #e0d8cc; color: #3a3a3a; }
+.t3 .m-key.correct { background: #e86820; color: white; }
+.t3 .m-key.present { background: #f0c830; color: #3a3a3a; }
+.t3 .m-key.absent  { background: #d0c8b8; color: #9a9080; }
+
+/* ═══════ THEME 4: Rainforest Dark ═══════ */
+.t4 .m-app { background: #0a1a10; }
+.t4 .m-header { color: #a0d8a0; border-color: #1a3020; }
+.t4 .m-tile.empty { border-color: #1a3020; }
+.t4 .m-tile.correct { background: #40d840; border-color: #40d840; color: #0a1a10; }
+.t4 .m-tile.present { background: #d8a820; border-color: #d8a820; color: #0a1a10; }
+.t4 .m-tile.absent  { background: #2a3a30; border-color: #2a3a30; color: #6a8a6a; }
+.t4 .m-tile.filled  { border-color: #3a5a3a; color: #a0d8a0; }
+.t4 .m-key { background: #1a3020; color: #a0d8a0; }
+.t4 .m-key.correct { background: #40d840; color: #0a1a10; }
+.t4 .m-key.present { background: #d8a820; color: #0a1a10; }
+.t4 .m-key.absent  { background: #0a1a10; color: #3a5a3a; }
+
+/* ═══════ THEME 5: Mono Mono ═══════ */
+.t5 .m-app { background: #f5e14d; }
+.t5 .m-header { color: #5a3a0a; border-color: #d8c030; }
+.t5 .m-tile.empty { border-color: #d8c030; }
+.t5 .m-tile.correct { background: #f0d020; border-color: #c8a800; color: #5a3a0a; }
+.t5 .m-tile.present { background: #7ab830; border-color: #7ab830; color: white; }
+.t5 .m-tile.absent  { background: #a08040; border-color: #a08040; color: #f5e14d; }
+.t5 .m-tile.filled  { border-color: #b0982a; color: #5a3a0a; }
+.t5 .m-key { background: #d8c030; color: #5a3a0a; }
+.t5 .m-key.correct { background: #c8a800; color: #5a3a0a; font-weight: 900; }
+.t5 .m-key.present { background: #7ab830; color: white; }
+.t5 .m-key.absent  { background: #a08040; color: #c8b060; }
+</style>
+</head>
+<body>
+<h1>🐒 Squirrel Monkey Wordle Themes</h1>
+<div class="mockups">
+
+<!-- THEME 1: Jungle Canopy -->
+<div class="mockup t1">
+  <div class="mockup-label">1. Jungle Canopy 🌿</div>
+  <div class="m-app">
+    <div class="m-header">Wordle</div>
+    <div class="m-board">
+      <div class="m-row">
+        <div class="m-tile correct">C</div>
+        <div class="m-tile absent">R</div>
+        <div class="m-tile present">A</div>
+        <div class="m-tile absent">N</div>
+        <div class="m-tile present">E</div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile correct">C</div>
+        <div class="m-tile present">H</div>
+        <div class="m-tile correct">A</div>
+        <div class="m-tile absent">S</div>
+        <div class="m-tile correct">E</div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile correct">C</div>
+        <div class="m-tile correct">L</div>
+        <div class="m-tile correct">A</div>
+        <div class="m-tile correct">S</div>
+        <div class="m-tile correct">P</div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile filled">T</div>
+        <div class="m-tile filled">R</div>
+        <div class="m-tile filled">A</div>
+        <div class="m-tile filled">I</div>
+        <div class="m-tile empty"></div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div>
+      </div>
+    </div>
+    <div class="m-kb">
+      <div class="m-kb-row">
+        <div class="m-key">Q</div><div class="m-key">W</div><div class="m-key absent">E</div><div class="m-key absent">R</div><div class="m-key">T</div><div class="m-key">Y</div><div class="m-key">U</div><div class="m-key">I</div><div class="m-key">O</div><div class="m-key">P</div>
+      </div>
+      <div class="m-kb-row">
+        <div class="m-key present">A</div><div class="m-key absent">S</div><div class="m-key">D</div><div class="m-key">F</div><div class="m-key">G</div><div class="m-key present">H</div><div class="m-key">J</div><div class="m-key">K</div><div class="m-key correct">L</div>
+      </div>
+      <div class="m-kb-row">
+        <div class="m-key">Z</div><div class="m-key">X</div><div class="m-key correct">C</div><div class="m-key">V</div><div class="m-key">B</div><div class="m-key absent">N</div><div class="m-key">M</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THEME 2: Golden Hour -->
+<div class="mockup t2">
+  <div class="mockup-label">2. Golden Hour 🌅</div>
+  <div class="m-app">
+    <div class="m-header">Wordle</div>
+    <div class="m-board">
+      <div class="m-row">
+        <div class="m-tile correct">C</div>
+        <div class="m-tile absent">R</div>
+        <div class="m-tile present">A</div>
+        <div class="m-tile absent">N</div>
+        <div class="m-tile present">E</div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile correct">C</div>
+        <div class="m-tile present">H</div>
+        <div class="m-tile correct">A</div>
+        <div class="m-tile absent">S</div>
+        <div class="m-tile correct">E</div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile correct">C</div>
+        <div class="m-tile correct">L</div>
+        <div class="m-tile correct">A</div>
+        <div class="m-tile correct">S</div>
+        <div class="m-tile correct">P</div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile filled">T</div>
+        <div class="m-tile filled">R</div>
+        <div class="m-tile filled">A</div>
+        <div class="m-tile filled">I</div>
+        <div class="m-tile empty"></div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div>
+      </div>
+    </div>
+    <div class="m-kb">
+      <div class="m-kb-row">
+        <div class="m-key">Q</div><div class="m-key">W</div><div class="m-key absent">E</div><div class="m-key absent">R</div><div class="m-key">T</div><div class="m-key">Y</div><div class="m-key">U</div><div class="m-key">I</div><div class="m-key">O</div><div class="m-key">P</div>
+      </div>
+      <div class="m-kb-row">
+        <div class="m-key present">A</div><div class="m-key absent">S</div><div class="m-key">D</div><div class="m-key">F</div><div class="m-key">G</div><div class="m-key present">H</div><div class="m-key">J</div><div class="m-key">K</div><div class="m-key correct">L</div>
+      </div>
+      <div class="m-kb-row">
+        <div class="m-key">Z</div><div class="m-key">X</div><div class="m-key correct">C</div><div class="m-key">V</div><div class="m-key">B</div><div class="m-key absent">N</div><div class="m-key">M</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THEME 3: Playful Pop -->
+<div class="mockup t3">
+  <div class="mockup-label">3. Playful Pop 🐒</div>
+  <div class="m-app">
+    <div class="m-header">🐵 Wordle</div>
+    <div class="m-board">
+      <div class="m-row">
+        <div class="m-tile correct">C</div>
+        <div class="m-tile absent">R</div>
+        <div class="m-tile present">A</div>
+        <div class="m-tile absent">N</div>
+        <div class="m-tile present">E</div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile correct">C</div>
+        <div class="m-tile present">H</div>
+        <div class="m-tile correct">A</div>
+        <div class="m-tile absent">S</div>
+        <div class="m-tile correct">E</div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile correct">C</div>
+        <div class="m-tile correct">L</div>
+        <div class="m-tile correct">A</div>
+        <div class="m-tile correct">S</div>
+        <div class="m-tile correct">P</div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile filled">T</div>
+        <div class="m-tile filled">R</div>
+        <div class="m-tile filled">A</div>
+        <div class="m-tile filled">I</div>
+        <div class="m-tile empty"></div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div>
+      </div>
+    </div>
+    <div class="m-kb">
+      <div class="m-kb-row">
+        <div class="m-key">Q</div><div class="m-key">W</div><div class="m-key absent">E</div><div class="m-key absent">R</div><div class="m-key">T</div><div class="m-key">Y</div><div class="m-key">U</div><div class="m-key">I</div><div class="m-key">O</div><div class="m-key">P</div>
+      </div>
+      <div class="m-kb-row">
+        <div class="m-key present">A</div><div class="m-key absent">S</div><div class="m-key">D</div><div class="m-key">F</div><div class="m-key">G</div><div class="m-key present">H</div><div class="m-key">J</div><div class="m-key">K</div><div class="m-key correct">L</div>
+      </div>
+      <div class="m-kb-row">
+        <div class="m-key">Z</div><div class="m-key">X</div><div class="m-key correct">C</div><div class="m-key">V</div><div class="m-key">B</div><div class="m-key absent">N</div><div class="m-key">M</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THEME 4: Rainforest Dark -->
+<div class="mockup t4">
+  <div class="mockup-label">4. Rainforest Dark 🌑</div>
+  <div class="m-app">
+    <div class="m-header">Wordle</div>
+    <div class="m-board">
+      <div class="m-row">
+        <div class="m-tile correct">C</div>
+        <div class="m-tile absent">R</div>
+        <div class="m-tile present">A</div>
+        <div class="m-tile absent">N</div>
+        <div class="m-tile present">E</div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile correct">C</div>
+        <div class="m-tile present">H</div>
+        <div class="m-tile correct">A</div>
+        <div class="m-tile absent">S</div>
+        <div class="m-tile correct">E</div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile correct">C</div>
+        <div class="m-tile correct">L</div>
+        <div class="m-tile correct">A</div>
+        <div class="m-tile correct">S</div>
+        <div class="m-tile correct">P</div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile filled">T</div>
+        <div class="m-tile filled">R</div>
+        <div class="m-tile filled">A</div>
+        <div class="m-tile filled">I</div>
+        <div class="m-tile empty"></div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div>
+      </div>
+    </div>
+    <div class="m-kb">
+      <div class="m-kb-row">
+        <div class="m-key">Q</div><div class="m-key">W</div><div class="m-key absent">E</div><div class="m-key absent">R</div><div class="m-key">T</div><div class="m-key">Y</div><div class="m-key">U</div><div class="m-key">I</div><div class="m-key">O</div><div class="m-key">P</div>
+      </div>
+      <div class="m-kb-row">
+        <div class="m-key present">A</div><div class="m-key absent">S</div><div class="m-key">D</div><div class="m-key">F</div><div class="m-key">G</div><div class="m-key present">H</div><div class="m-key">J</div><div class="m-key">K</div><div class="m-key correct">L</div>
+      </div>
+      <div class="m-kb-row">
+        <div class="m-key">Z</div><div class="m-key">X</div><div class="m-key correct">C</div><div class="m-key">V</div><div class="m-key">B</div><div class="m-key absent">N</div><div class="m-key">M</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- THEME 5: Mono Mono -->
+<div class="mockup t5">
+  <div class="mockup-label">5. Mono Mono 🍌</div>
+  <div class="m-app">
+    <div class="m-header">🐒 Wordle</div>
+    <div class="m-board">
+      <div class="m-row">
+        <div class="m-tile correct">C</div>
+        <div class="m-tile absent">R</div>
+        <div class="m-tile present">A</div>
+        <div class="m-tile absent">N</div>
+        <div class="m-tile present">E</div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile correct">C</div>
+        <div class="m-tile present">H</div>
+        <div class="m-tile correct">A</div>
+        <div class="m-tile absent">S</div>
+        <div class="m-tile correct">E</div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile correct">C</div>
+        <div class="m-tile correct">L</div>
+        <div class="m-tile correct">A</div>
+        <div class="m-tile correct">S</div>
+        <div class="m-tile correct">P</div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile filled">T</div>
+        <div class="m-tile filled">R</div>
+        <div class="m-tile filled">A</div>
+        <div class="m-tile filled">I</div>
+        <div class="m-tile empty"></div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div>
+      </div>
+      <div class="m-row">
+        <div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div><div class="m-tile empty"></div>
+      </div>
+    </div>
+    <div class="m-kb">
+      <div class="m-kb-row">
+        <div class="m-key">Q</div><div class="m-key">W</div><div class="m-key absent">E</div><div class="m-key absent">R</div><div class="m-key">T</div><div class="m-key">Y</div><div class="m-key">U</div><div class="m-key">I</div><div class="m-key">O</div><div class="m-key">P</div>
+      </div>
+      <div class="m-kb-row">
+        <div class="m-key present">A</div><div class="m-key absent">S</div><div class="m-key">D</div><div class="m-key">F</div><div class="m-key">G</div><div class="m-key present">H</div><div class="m-key">J</div><div class="m-key">K</div><div class="m-key correct">L</div>
+      </div>
+      <div class="m-kb-row">
+        <div class="m-key">Z</div><div class="m-key">X</div><div class="m-key correct">C</div><div class="m-key">V</div><div class="m-key">B</div><div class="m-key absent">N</div><div class="m-key">M</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
