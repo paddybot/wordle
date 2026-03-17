@@ -776,10 +776,11 @@ function submitGuess() {
   const won = result.every(r => r === 'correct');
   if (won) {
     gameOver = true;
+    const wonRow = currentRow; // capture before incrementing
     setTimeout(() => {
-      bounceRow(currentRow);
+      bounceRow(wonRow);
       const msgs = ['Genius', 'Magnificent', 'Impressive', 'Splendid', 'Great', 'Phew'];
-      showToast(msgs[currentRow] || 'Nice!');
+      showToast(msgs[wonRow] || 'Nice!');
     }, WORD_LENGTH * 300 + 200);
     setTimeout(() => {
       const stats = loadStats();
@@ -801,11 +802,11 @@ function submitGuess() {
         stats.streak = 1;
       }
       stats.maxStreak = Math.max(stats.maxStreak, stats.streak);
-      stats.dist[currentRow]++;
+      stats.dist[wonRow]++;
       stats.lastDate = today;
       saveStats(stats);
-      recordGame(true, currentRow + 1);
-      showStatsModal(stats, currentRow);
+      recordGame(true, wonRow + 1);
+      showStatsModal(stats, wonRow);
     }, WORD_LENGTH * 300 + 1600);
     currentRow++;
     saveGame();
