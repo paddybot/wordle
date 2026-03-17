@@ -374,70 +374,32 @@ header h1 {
 </div>
 
 <script>
-// ─── NYT Wordle answer list (original ordered list, indexed by day from June 19 2021) ───
-// This is the canonical ordered list the original Wordle used. NYT occasionally swaps a word
-// but this matches ~99% of days. 2309 words.
-const ANSWERS = [
+// ─── NYT Wordle: fetch daily word from synced words.json ───
+// words.json is updated daily by GitHub Actions from the NYT API
+// Fallback: use a static list if fetch fails
+let NYT_WORDS = null; // loaded async
+
+const FALLBACK_ANSWERS = [
 "cigar","rebut","sissy","humps","awake","blush","focal","evade","naval","serve",
 "heath","dwelt","humor","grill","combo","prude","gonzo","tract","dance","place",
-"tithe","ultra","covey","homey","shrub","rarer","avert","sadly","sissy","humid",
-"favor","carol","hilly","ivory","pluck","kneel","snarl","haute","douse","unmix",
-"regal","grout","heist","sever","arrow","could","lefty","tiara","snore","truce",
-"vigor","birch","shine","squat","snare","toffy","caper","modem","crisp","rhino",
-"gorge","query","drink","favor","abbey","tangy","panic","solar","shire","proxy",
-"point","robot","prick","wince","crimp","knoll","sugar","whack","mount","perky",
-"could","wrung","light","those","moist","shard","pleat","aloft","skill","elder",
-"frame","humor","pause","ulcer","ultra","robin","cynic","agora","aroma","caulk",
-"shake","dodge","swill","tacit","other","thorn","trove","bloke","vivid","spill",
-"chafe","clink","bride","gazer","croak","hyper","rouse","feint","sissy","cheek",
-"foyer","cargo","oxide","plant","olive","inert","askew","heist","shown","zesty",
-"hasty","trash","fella","larva","forgo","story","hairy","train","homer","badge",
-"midst","blanch","tiger","blaze","tweed","sling","shawl","class","vigor","sheep",
-"buzzy","liner","voila","grime","knack","whoop","poise","epoch","stork","snore",
-"arose","gripe","saute","spice","juice","asset","repay","minim","china","nuder",
-"baron","jiffy","ruder","gauze","visit","rumba","expel","world","lorry","pupil",
-"spurt","trice","debut","hyena","perch","swear","rebut","unify","troop","level",
-"showy","lemon","heady","gamut","shawl","boney","drone","terra","taste","stead",
-"siege","fetid","prism","mince","merry","guilt","penny","usher","civic","grave",
-"solar","feign","ruder","sonic","crane","shire","being","scuff","surge","taker",
-"blitz","spire","slack","liege","tipsy","peril","pilot","proud","block","alarm",
-"saucy","scrap","rowdy","levee","worry","ferry","tooth","midge","joint","plumb",
-"bloat","fixed","unfit","dwell","caulk","blown","crepe","orbit","merit","latte",
-"witch","moist","druid","berry","spoke","steak","sneak","crass","riper","sheer",
-"slash","cedar","tepid","spine","steep","whelp","model","smear","phase","froth",
-"depth","gloom","flood","trait","girth","piety","payer","goose","float","donor",
-"atone","primo","apron","blown","cacao","loser","input","gloat","awful","brink",
-"smelt","stint","while","begat","apply","slang","tarot","radar","credo","aware",
-"tansy","cross","boxer","jumbo","braze","unify","elite","stiff","major","farce",
-"begun","whirl","scowl","glove","bayou","pilot","vapor","cache","awash","their",
-"throe","miser","seven","iliac","denim","snout","kraft","child","bench","flash",
-"budge","lousy","gecko","spate","penne","gouge","scone","begun","grimy","depot",
-"facet","crust","exude","afire","sniff","dryly","sight","curio","plush","bravo",
-"jewel","abbey","joust","mania","fetal","leapt","voice","utter","tacky","shrug",
-"extra","stern","clown","edict","siege","hyena","their","panic","psalm","wound",
-"wrist","orbit","torus","cheat","rusty","stein","solar","onset","wafer","bowel",
-"eclat","filet","chasm","adore","elder","newel","vapor","plume","super","cedar",
-"belle","brine","carte","valor","ridge","pesky","draft","allot","cramp","louse",
-"foyer","steal","chant","tuned","borax","laser","squid","drive","motor","inlet",
-"melee","marsh","vigor","elbow","crash","leapt","giddy","penny","silly","began",
-"bleed","batch","graze","break","dowdy","effin","could","knock","ultra","store",
-"venom","covet","tepid","clump","shrew","swear","usher","reign","brisk","lying",
-"hunch","dodge","swirl","ultra","humid","fibre","sever","mirth","could","plait",
-"night","bland","liver","wedge","augur","roomy","wacky","flock","angry","bobby",
-"trite","aphid","tryst","midge","power","elope","cinch","motto","stomp","upset",
-"bluff","cramp","quart","cater","bleep","retry","super","qualm","until","phase",
-"glaze","digit","clerk","lowly","joist","mango","relay","token","lusty","piked",
-"froze","troll","friar","resin","boost","troop","chunk","beefy","usage","vigor",
-"prong","cutey","slunk","butch","queue","whole","gourd","black","serve","prime",
-"shame","ultra","ledge","stole","lemon","chore","spine","tacit","steel","debit",
-"usher","their","batch","deter","think","marsh","dowel","scree","sharp","essay",
-"visor","brute","tight","melee","gripe","rivet","tacky","sauce","ultra","novel",
-"ferry","vigor","ditto","cruel","valet","humor","renew","mania","belle","bleat",
-"scare","sissy","bride","brine","whine","amiss","sigma","ionic","about","defer",
-"ultra","snore","augur","shove","surge","ahead","false","stare","cargo","ultra",
-"trope","cynic","liver","gauze","trait","caulk","olive","tower","tepid","going",
-"wrist","poser","vigor","count","medal","dutch","creed","liver","ultra","olive",
-"tease","vigor","steak","rivet","eclat","could","gauze","stale","could","ultra"
+"tithe","ultra","covey","homey","shrub","rarer","avert","sadly","humid","favor",
+"carol","hilly","ivory","pluck","kneel","snarl","haute","douse","regal","grout",
+"heist","sever","arrow","could","lefty","tiara","snore","truce","vigor","birch",
+"shine","squat","snare","caper","modem","crisp","rhino","gorge","query","drink",
+"favor","abbey","tangy","panic","solar","shire","proxy","point","robot","prick",
+"wince","crimp","knoll","sugar","whack","mount","perky","could","wrung","light",
+"those","moist","shard","pleat","aloft","skill","elder","frame","humor","pause",
+"ulcer","ultra","robin","cynic","agora","aroma","caulk","shake","dodge","swill",
+"tacit","other","thorn","trove","bloke","vivid","spill","chafe","clink","bride",
+"croak","hyper","rouse","feint","cheek","foyer","cargo","oxide","plant","olive",
+"inert","askew","heist","shown","zesty","hasty","trash","fella","larva","forgo",
+"story","hairy","train","homer","badge","midst","tiger","blaze","tweed","sling",
+"shawl","class","vigor","sheep","liner","voila","grime","knack","whoop","poise",
+"epoch","stork","snore","arose","gripe","saute","spice","juice","asset","repay",
+"china","baron","jiffy","ruder","gauze","visit","rumba","expel","world","lorry",
+"pupil","spurt","trice","debut","hyena","perch","swear","rebut","unify","troop",
+"level","showy","lemon","heady","gamut","shawl","drone","terra","taste","stead",
+"siege","fetid","prism","mince","merry","guilt","penny","usher","civic","grave"
 ];
 
 // ─── Large valid guess dictionary ───
@@ -464,16 +426,36 @@ let boardState = [];
 let letterStates = {};
 let hardMode = false;
 
-// ─── Daily word selection (matches NYT algorithm) ───
+// ─── Daily word selection ───
 function getDayNumber() {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   return Math.floor((today - WORDLE_EPOCH) / 86400000);
 }
 
-function getDailyWord() {
+function getTodayDateStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+async function fetchNYTWord() {
+  try {
+    const resp = await fetch('words.json?t=' + Date.now());
+    if (!resp.ok) throw new Error('fetch failed');
+    NYT_WORDS = await resp.json();
+    const today = getTodayDateStr();
+    if (NYT_WORDS[today] && NYT_WORDS[today].solution) {
+      return NYT_WORDS[today].solution.toUpperCase();
+    }
+  } catch (e) {
+    console.warn('Could not fetch NYT words, using fallback:', e);
+  }
+  return null;
+}
+
+function getDailyWordFallback() {
   const day = getDayNumber();
-  return ANSWERS[day % ANSWERS.length].toUpperCase();
+  return FALLBACK_ANSWERS[day % FALLBACK_ANSWERS.length].toUpperCase();
 }
 
 function getTodayKey() {
@@ -877,7 +859,8 @@ function updateTimer() {
 
 // ─── Settings Modal ───
 function openSettings() {
-  document.getElementById('day-number-label').textContent = `Wordle #${getDayNumber()}`;
+  const dayNum = (NYT_WORDS && NYT_WORDS[getTodayDateStr()]) ? NYT_WORDS[getTodayDateStr()].day : getDayNumber();
+  document.getElementById('day-number-label').textContent = `Wordle #${dayNum}`;
   document.getElementById('hard-mode-toggle').checked = hardMode;
   updateHardModeToggle();
   document.getElementById('settings-modal').classList.add('show');
@@ -916,8 +899,10 @@ document.querySelectorAll('.modal-overlay').forEach(overlay => {
 });
 
 // ─── Init ───
-function init() {
-  targetWord = getDailyWord();
+async function init() {
+  // Try to get today's word from NYT-synced data first
+  const nytWord = await fetchNYTWord();
+  targetWord = nytWord || getDailyWordFallback();
   buildBoard();
   buildKeyboard();
 

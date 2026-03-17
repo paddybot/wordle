@@ -1,0 +1,76 @@
+name: Sync NYT Wordle Words
+
+on:
+  schedule:
+    # Run at midnight UTC every day
+    - cron: '0 0 * * *'
+  # Also run on push (for initial seed)
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch NYT words
+        run: |
+          # Fetch today and next 7 days of words from NYT API
+          echo "{" > words.json
+          first=true
+          for i in $(seq 0 7); do
+            date=$(date -u -d "+${i} days" +%Y-%m-%d 2>/dev/null || date -u -v+${i}d +%Y-%m-%d)
+            response=$(curl -sf "https://www.nytimes.com/svc/wordle/v2/${date}.json" || echo "")
+            if [ -n "$response" ]; then
+              solution=$(echo "$response" | python3 -c "import sys,json; print(json.load(sys.stdin)['solution'])" 2>/dev/null || echo "")
+              day_num=$(echo "$response" | python3 -c "import sys,json; print(json.load(sys.stdin)['days_since_launch'])" 2>/dev/null || echo "")
+              if [ -n "$solution" ] && [ -n "$day_num" ]; then
+                if [ "$first" = true ]; then
+                  first=false
+                else
+                  echo "," >> words.json
+                fi
+                printf '  "%s": {"solution": "%s", "day": %s}' "$date" "$solution" "$day_num" >> words.json
+              fi
+            fi
+          done
+          echo "" >> words.json
+          echo "}" >> words.json
+          
+          # Also maintain a cumulative history file
+          if [ -f words-history.json ]; then
+            # Merge new words into history
+            python3 -c "
+          import json
+          with open('words-history.json') as f:
+              history = json.load(f)
+          with open('words.json') as f:
+              new_words = json.load(f)
+          history.update(new_words)
+          with open('words-history.json', 'w') as f:
+              json.dump(history, f, indent=2, sort_keys=True)
+          "
+          else
+            cp words.json words-history.json
+            python3 -c "
+          import json
+          with open('words-history.json') as f:
+              data = json.load(f)
+          with open('words-history.json', 'w') as f:
+              json.dump(data, f, indent=2, sort_keys=True)
+          "
+          fi
+          
+          cat words.json
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add words.json words-history.json
+          git diff --cached --quiet || (git commit -m "Sync NYT Wordle words $(date -u +%Y-%m-%d)" && git push)
