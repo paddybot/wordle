@@ -1070,6 +1070,12 @@ function resetGameState() {
 }
 
 function restoreSavedGame() {
+  // Always use global setting as source of truth for hard mode
+  const settings = loadSettings();
+  hardMode = settings.hardMode || false;
+  document.getElementById('hard-badge').classList.toggle('show', hardMode);
+  document.getElementById('hard-mode-toggle').checked = hardMode;
+
   const saved = loadGame();
   if (saved) {
     boardState = saved.boardState || [];
@@ -1078,9 +1084,6 @@ function restoreSavedGame() {
     currentGuess = saved.currentGuess;
     gameOver = saved.gameOver;
     letterStates = saved.letterStates || {};
-    if (saved.hardMode !== undefined) hardMode = saved.hardMode;
-    document.getElementById('hard-badge').classList.toggle('show', hardMode);
-    document.getElementById('hard-mode-toggle').checked = hardMode;
 
     boardState.forEach((entry, r) => {
       for (let c = 0; c < WORD_LENGTH; c++) {
