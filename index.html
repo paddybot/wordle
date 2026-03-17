@@ -341,14 +341,15 @@ header h1 {
   margin-left: 6px;
 }
 #date-hidden-input {
-  position: fixed;
-  top: -100px;
-  left: -100px;
+  position: absolute;
   opacity: 0;
-  width: 1px;
-  height: 1px;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   pointer-events: none;
-  z-index: -1;
+  cursor: pointer;
+  color-scheme: dark;
 }
 #today-nav-btn {
   background: var(--green);
@@ -399,8 +400,8 @@ header h1 {
     <span id="date-label" onclick="openDatePicker()">
       <span id="date-text">Today</span>
       <span class="day-num" id="date-day-num"></span>
+      <input type="date" id="date-hidden-input" onchange="handleDateInput(this.value)">
     </span>
-    <input type="date" id="date-hidden-input" onchange="handleDateInput(this.value)">
     <button class="nav-arrow" id="next-day" onclick="stepDate(1)">▶</button>
     <button id="today-nav-btn" onclick="backToToday()">Today</button>
   </nav>
@@ -1073,6 +1074,7 @@ function openDatePicker() {
 }
 
 function handleDateInput(value) {
+  console.log('handleDateInput called:', value, 'pickerOpen:', datePickerOpen);
   if (!datePickerOpen) return; // ignore accidental triggers
   datePickerOpen = false;
   if (value) changeDate(value);
@@ -1097,6 +1099,7 @@ function stepDate(delta) {
 
 // ─── Date switching ───
 function changeDate(dateStr) {
+  console.log('changeDate called:', dateStr, new Error().stack);
   if (!dateStr) return;
   const todayStr = getTodayDateStr();
   if (dateStr === todayStr) {
