@@ -372,6 +372,163 @@ body.monkey #vine-left, body.monkey #vine-right { display: block; }
 #vine-left { top: 60px; left: 2px; }
 #vine-right { top: 80px; right: 2px; }
 
+/* ═══ ROLLING MODE ═══ */
+#rolling-btn {
+  background: none;
+  border: 1px solid var(--dark-grey);
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 14px;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: all 0.2s;
+}
+#rolling-btn:hover { background: var(--dark-grey); }
+#rolling-btn.active {
+  background: var(--green);
+  border-color: var(--green);
+  color: white;
+}
+body.monkey #rolling-btn.active { background: #e86820; border-color: #e86820; }
+
+/* Rolling board container replaces normal board */
+body.rolling #board-container { display: none; }
+body.rolling #rolling-container { display: flex; }
+body.rolling #date-nav .nav-arrow,
+body.rolling #date-label { display: none; }
+body.rolling #today-nav-btn { display: none !important; }
+body.rolling #rolling-nav { display: flex !important; }
+
+#rolling-container {
+  display: none;
+  flex: 1;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+  position: relative;
+}
+#rolling-scroll {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  position: relative;
+}
+#rolling-history {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 4px 0;
+  transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.history-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  opacity: 0.5;
+  transform: scale(0.85);
+  transition: opacity 0.5s, transform 0.5s;
+}
+.history-game .mini-row {
+  display: flex;
+  gap: 2px;
+}
+.history-game .mini-tile {
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 8px;
+  font-weight: 700;
+  color: white;
+}
+.mini-tile.correct { background: var(--green); }
+.mini-tile.present { background: var(--yellow); }
+.mini-tile.absent { background: var(--grey); }
+body.monkey .mini-tile.correct { background: #e86820; }
+body.monkey .mini-tile.present { background: #f0c830; color: #2a1a08; }
+body.monkey .mini-tile.absent { background: #485840; }
+
+.history-game .game-label {
+  font-size: 9px;
+  color: #888;
+  font-weight: 600;
+}
+
+#rolling-board-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0;
+  flex-shrink: 0;
+}
+#rolling-board {
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  gap: 4px;
+  --tile-size: min(50px, 11vw);
+  width: calc(var(--tile-size) * 5 + 4px * 4);
+  height: calc(var(--tile-size) * 7 + 4px * 6);
+}
+#rolling-board .row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 4px;
+}
+
+/* Answer row - the carried-over word */
+#rolling-board .row.answer-row .tile {
+  background: var(--green) !important;
+  border-color: var(--green) !important;
+  color: white;
+  font-size: min(1.6rem, 6vw);
+}
+body.monkey #rolling-board .row.answer-row .tile {
+  background: #e86820 !important;
+  border-color: #c05818 !important;
+  box-shadow: 0 0 10px rgba(232,104,32,0.4);
+}
+
+/* Slide-up animation */
+@keyframes slideUp {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-100%); opacity: 0.5; }
+}
+
+/* Flash animation for completed word */
+@keyframes answerFlash {
+  0%, 100% { box-shadow: 0 0 0 rgba(255,238,0,0); }
+  25% { box-shadow: 0 0 30px rgba(255,238,0,0.8), 0 0 60px rgba(232,104,32,0.4); }
+  50% { box-shadow: 0 0 10px rgba(255,238,0,0.3); }
+  75% { box-shadow: 0 0 40px rgba(255,238,0,0.9), 0 0 80px rgba(232,104,32,0.5); }
+}
+.row.flash-answer .tile {
+  animation: answerFlash 1.5s ease !important;
+}
+
+/* Rolling nav info */
+#rolling-nav {
+  display: none !important;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+#rolling-game-num {
+  color: var(--green);
+}
+body.monkey #rolling-game-num { color: #e86820; }
+#rolling-streak {
+  font-size: 12px;
+  color: #888;
+}
+
 html, body {
   height: 100%;
   background: var(--bg);
@@ -761,6 +918,11 @@ header h1 {
     </span>
     <button class="nav-arrow" id="next-day" onclick="stepDate(1); this.blur()">▶</button>
     <button id="today-nav-btn" onclick="backToToday(); this.blur()">Today</button>
+    <button id="rolling-btn" onclick="toggleRollingMode(); this.blur()">🎰 Rolling</button>
+    <div id="rolling-nav">
+      <span>Game <span id="rolling-game-num">1</span></span>
+      <span id="rolling-streak"></span>
+    </div>
   </nav>
   <div id="toast-container"></div>
   <div id="mascot-area">
@@ -769,6 +931,14 @@ header h1 {
     </div>
   </div>
   <div id="board-container"><div id="board"></div></div>
+  <div id="rolling-container">
+    <div id="rolling-scroll">
+      <div id="rolling-history"></div>
+      <div id="rolling-board-wrapper">
+        <div id="rolling-board"></div>
+      </div>
+    </div>
+  </div>
   <div id="vine-left">🌿<br>🍃<br>🌿<br>🍃<br>🌿</div>
   <div id="vine-right">🍃<br>🌿<br>🍃<br>🌿<br>🍃</div>
   <div id="keyboard"></div>
@@ -1149,17 +1319,21 @@ function handleKey(key) {
     if (currentCol > 0) {
       currentCol--;
       currentGuess = currentGuess.slice(0, -1);
-      const tile = document.getElementById(`tile-${currentRow}-${currentCol}`);
-      tile.textContent = '';
-      tile.classList.remove('filled');
+      const tile = document.getElementById(getTileId(currentRow, currentCol));
+      if (tile) {
+        tile.textContent = '';
+        tile.classList.remove('filled');
+      }
     }
   } else if (key === 'ENTER') {
     submitGuess();
   } else if (key.length === 1 && /^[A-Z]$/i.test(key) && currentCol < WORD_LENGTH) {
     const letter = key.toUpperCase();
-    const tile = document.getElementById(`tile-${currentRow}-${currentCol}`);
-    tile.textContent = letter;
-    tile.classList.add('filled');
+    const tile = document.getElementById(getTileId(currentRow, currentCol));
+    if (tile) {
+      tile.textContent = letter;
+      tile.classList.add('filled');
+    }
     currentGuess += letter;
     currentCol++;
   }
@@ -1237,10 +1411,20 @@ function submitGuess() {
       stats.lastDate = today;
       saveStats(stats);
       recordGame(true, wonRow + 1);
-      showStatsModal(stats, wonRow);
+      if (!rollingMode) showStatsModal(stats, wonRow);
     }, WORD_LENGTH * 300 + 1600);
     currentRow++;
-    saveGame();
+    if (rollingMode) {
+      saveRollingState();
+      // Flash the winning row, then transition
+      setTimeout(() => {
+        const winRow = document.getElementById(getRowId(wonRow));
+        if (winRow) winRow.classList.add('flash-answer');
+      }, WORD_LENGTH * 300 + 200);
+      setTimeout(() => rollingNextGame(), WORD_LENGTH * 300 + 3000);
+    } else {
+      saveGame();
+    }
     updateHardModeToggle();
     return;
   }
@@ -1265,10 +1449,19 @@ function submitGuess() {
       stats.lastDate = getTodayKey();
       saveStats(stats);
       recordGame(false, -1);
-      showStatsModal(stats, -1);
+      if (!rollingMode) showStatsModal(stats, -1);
     }, WORD_LENGTH * 300 + 1600);
+
+    if (rollingMode) {
+      saveRollingState();
+      setTimeout(() => rollingNextGame(), WORD_LENGTH * 300 + 3500);
+    }
   }
-  saveGame();
+  if (rollingMode) {
+    saveRollingState();
+  } else {
+    saveGame();
+  }
   updateHardModeToggle();
 }
 
@@ -1302,7 +1495,8 @@ function evaluateGuess(guess, target) {
 function revealRow(row, result) {
   const guess = boardState[row].guess;
   for (let i = 0; i < WORD_LENGTH; i++) {
-    const tile = document.getElementById(`tile-${row}-${i}`);
+    const tile = document.getElementById(getTileId(row, i));
+    if (!tile) continue;
     setTimeout(() => {
       tile.classList.add('reveal');
       setTimeout(() => {
@@ -1327,14 +1521,13 @@ function updateKeyboard(letter, state) {
 
 // ─── Row animations ───
 function shakeRow(row) {
-  const el = document.getElementById(`row-${row}`);
-  el.classList.add('shake');
-  setTimeout(() => el.classList.remove('shake'), 500);
+  const el = document.getElementById(getRowId(row));
+  if (el) { el.classList.add('shake'); setTimeout(() => el.classList.remove('shake'), 500); }
 }
 function bounceRow(row) {
   for (let i = 0; i < WORD_LENGTH; i++) {
-    const tile = document.getElementById(`tile-${row}-${i}`);
-    setTimeout(() => tile.classList.add('bounce'), i * 100);
+    const tile = document.getElementById(getTileId(row, i));
+    if (tile) setTimeout(() => tile.classList.add('bounce'), i * 100);
   }
 }
 
@@ -1896,6 +2089,264 @@ function mascotReactToGuess(result) {
   } else {
     setMascot('worried', 'absent', 'worried', 2500);
   }
+}
+
+// ─── ROLLING MODE ───
+let rollingMode = false;
+let rollingState = null; // {gameNum, streak, currentAnswer, boardState, currentRow, currentCol, currentGuess, gameOver, letterStates, history}
+
+function toggleRollingMode() {
+  rollingMode = !rollingMode;
+  document.body.classList.toggle('rolling', rollingMode);
+  document.getElementById('rolling-btn').classList.toggle('active', rollingMode);
+
+  if (rollingMode) {
+    loadRollingState();
+    buildRollingBoard();
+    restoreRollingGame();
+  } else {
+    // Switch back to normal mode
+    saveRollingState();
+  }
+}
+
+function loadRollingState() {
+  try {
+    rollingState = JSON.parse(localStorage.getItem('wordle-rolling')) || null;
+  } catch { rollingState = null; }
+
+  if (!rollingState) {
+    // Start fresh - pick a random word
+    const randomWord = getRandomWord();
+    rollingState = {
+      gameNum: 1,
+      streak: 0,
+      currentAnswer: randomWord,
+      boardState: [],
+      currentRow: 0,
+      currentCol: 0,
+      currentGuess: '',
+      gameOver: false,
+      letterStates: {},
+      history: [] // [{guesses, answer, won, gameNum}]
+    };
+  }
+  targetWord = rollingState.currentAnswer;
+  updateRollingNav();
+}
+
+function saveRollingState() {
+  if (!rollingState) return;
+  rollingState.boardState = boardState;
+  rollingState.currentRow = currentRow;
+  rollingState.currentCol = currentCol;
+  rollingState.currentGuess = currentGuess;
+  rollingState.gameOver = gameOver;
+  rollingState.letterStates = letterStates;
+  localStorage.setItem('wordle-rolling', JSON.stringify(rollingState));
+}
+
+function getRandomWord() {
+  // Pick from history data or fallback
+  const sources = [];
+  if (historyData) Object.values(historyData).forEach(v => sources.push(v.solution.toUpperCase()));
+  if (sources.length < 50) FALLBACK_ANSWERS.forEach(w => sources.push(w.toUpperCase()));
+  const word = sources[Math.floor(Math.random() * sources.length)];
+  VALID_GUESSES.add(word.toLowerCase());
+  return word;
+}
+
+function updateRollingNav() {
+  if (!rollingState) return;
+  document.getElementById('rolling-game-num').textContent = rollingState.gameNum;
+  const streakEl = document.getElementById('rolling-streak');
+  if (rollingState.streak > 0) {
+    streakEl.textContent = `🔥 ${rollingState.streak} streak`;
+  } else {
+    streakEl.textContent = '';
+  }
+}
+
+function buildRollingBoard() {
+  const board = document.getElementById('rolling-board');
+  board.innerHTML = '';
+
+  // Row 0 = answer row (the carried-over word from last game)
+  const answerRow = document.createElement('div');
+  answerRow.className = 'row answer-row';
+  answerRow.id = 'rolling-row-0';
+
+  if (rollingState.history.length > 0) {
+    const lastGame = rollingState.history[rollingState.history.length - 1];
+    for (let c = 0; c < WORD_LENGTH; c++) {
+      const tile = document.createElement('div');
+      tile.className = 'tile correct';
+      tile.textContent = lastGame.answer[c];
+      tile.id = `rtile-0-${c}`;
+      answerRow.appendChild(tile);
+    }
+  } else {
+    // First game - empty answer row (hidden)
+    for (let c = 0; c < WORD_LENGTH; c++) {
+      const tile = document.createElement('div');
+      tile.className = 'tile';
+      tile.id = `rtile-0-${c}`;
+      tile.style.visibility = 'hidden';
+      answerRow.appendChild(tile);
+    }
+    answerRow.style.height = '0';
+    answerRow.style.overflow = 'hidden';
+  }
+  board.appendChild(answerRow);
+
+  // Rows 1-6 = guess rows
+  for (let r = 1; r <= MAX_GUESSES; r++) {
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.id = `rolling-row-${r}`;
+    for (let c = 0; c < WORD_LENGTH; c++) {
+      const tile = document.createElement('div');
+      tile.className = 'tile';
+      tile.id = `rtile-${r}-${c}`;
+      row.appendChild(tile);
+    }
+    board.appendChild(row);
+  }
+
+  // Render history
+  renderRollingHistory();
+}
+
+function renderRollingHistory() {
+  const container = document.getElementById('rolling-history');
+  container.innerHTML = '';
+  // Show last 5 games
+  const recent = (rollingState.history || []).slice(-5);
+  recent.forEach((game, idx) => {
+    const div = document.createElement('div');
+    div.className = 'history-game';
+    const label = document.createElement('div');
+    label.className = 'game-label';
+    label.textContent = `#${game.gameNum} ${game.won ? '✓' : '✗'} ${game.answer}`;
+    div.appendChild(label);
+    game.guesses.forEach(g => {
+      const row = document.createElement('div');
+      row.className = 'mini-row';
+      for (let i = 0; i < WORD_LENGTH; i++) {
+        const tile = document.createElement('div');
+        tile.className = 'mini-tile ' + g.result[i];
+        tile.textContent = g.guess[i];
+        row.appendChild(tile);
+      }
+      div.appendChild(row);
+    });
+    container.appendChild(div);
+  });
+}
+
+function restoreRollingGame() {
+  boardState = rollingState.boardState || [];
+  currentRow = rollingState.currentRow || 0;
+  currentCol = rollingState.currentCol || 0;
+  currentGuess = rollingState.currentGuess || '';
+  gameOver = rollingState.gameOver || false;
+  letterStates = rollingState.letterStates || {};
+  targetWord = rollingState.currentAnswer;
+
+  // Restore tiles
+  boardState.forEach((entry, r) => {
+    for (let c = 0; c < WORD_LENGTH; c++) {
+      const tile = document.getElementById(`rtile-${r+1}-${c}`);
+      if (tile) {
+        tile.textContent = entry.guess[c];
+        tile.classList.add('filled', entry.result[c]);
+      }
+    }
+  });
+
+  // Restore keyboard
+  Object.entries(letterStates).forEach(([letter, state]) => {
+    const key = document.getElementById(`key-${letter}`);
+    if (key) key.classList.add(state);
+  });
+}
+
+function rollingNextGame() {
+  const lastAnswer = targetWord;
+
+  // Add to history
+  rollingState.history.push({
+    gameNum: rollingState.gameNum,
+    guesses: [...boardState],
+    answer: lastAnswer,
+    won: boardState.length <= MAX_GUESSES && boardState[boardState.length-1]?.result.every(r => r === 'correct')
+  });
+
+  // Keep last 20 games
+  if (rollingState.history.length > 20) rollingState.history = rollingState.history.slice(-20);
+
+  // Update stats
+  const won = rollingState.history[rollingState.history.length - 1].won;
+  if (won) {
+    rollingState.streak++;
+  } else {
+    rollingState.streak = 0;
+  }
+  rollingState.gameNum++;
+
+  // Next word = new random word (the DISPLAY shows the last answer as first row)
+  const nextWord = getRandomWord();
+  rollingState.currentAnswer = nextWord;
+  rollingState.boardState = [];
+  rollingState.currentRow = 0;
+  rollingState.currentCol = 0;
+  rollingState.currentGuess = '';
+  rollingState.gameOver = false;
+  rollingState.letterStates = {};
+
+  // Reset game state
+  boardState = [];
+  currentRow = 0;
+  currentCol = 0;
+  currentGuess = '';
+  gameOver = false;
+  letterStates = {};
+  targetWord = nextWord;
+  VALID_GUESSES.add(nextWord.toLowerCase());
+
+  // Rebuild keyboard
+  buildKeyboard();
+
+  // Animate transition
+  const boardEl = document.getElementById('rolling-board');
+  boardEl.style.transition = 'transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s';
+  boardEl.style.transform = 'translateY(-60px)';
+  boardEl.style.opacity = '0.3';
+
+  setTimeout(() => {
+    buildRollingBoard();
+    boardEl.style.transition = 'none';
+    boardEl.style.transform = 'translateY(60px)';
+    boardEl.style.opacity = '0.3';
+    void boardEl.offsetWidth;
+    boardEl.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s';
+    boardEl.style.transform = 'translateY(0)';
+    boardEl.style.opacity = '1';
+
+    updateRollingNav();
+    saveRollingState();
+  }, 800);
+}
+
+// Override tile IDs for rolling mode
+function getTileId(row, col) {
+  if (rollingMode) return `rtile-${row + 1}-${col}`;
+  return `tile-${row}-${col}`;
+}
+
+function getRowId(row) {
+  if (rollingMode) return `rolling-row-${row + 1}`;
+  return `row-${row}`;
 }
 
 // ─── Close modals ───
