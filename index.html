@@ -1880,15 +1880,43 @@ function launchConfetti() {
 
 // ─── Fun monkey toast messages ───
 function getMonkeyWinMessage(row) {
-  const msgs = [
-    '🍌 OK FINE. Genius. Whatever. 🍌',
-    '🐒 Took you long enough!! 🐒',
-    '🌟 Not bad for a HUMAN 🌟',
-    '🎉 I guess even YOU get lucky 🎉',
-    "🥳 5 guesses?! I'd have got it in 2 🥳",
-    '🐵 SIX?! That was PAINFUL to watch 🐵'
+  const pool = [
+    [
+      "🍌 ...I was ABOUT to guess that. You just clicked faster. 🍌",
+      "🐒 Fine. FINE. That was... acceptable. I'm not impressed though.",
+      "🙄 I KNEW it was that word. I was just letting you have it.",
+      "🐵 OK technically you got it but I had it on my NEXT guess.",
+      "😤 Whatever. My paw slipped or I'd have beaten you to it.",
+      "🍌 Congratulations on doing the BARE MINIMUM I guess.",
+    ],
+    [
+      "🐒 Two guesses. So what?? I'd have done it in one but I felt generous.",
+      "😤 That was... OK fine that was SLIGHTLY impressive. Don't let it go to your head.",
+      "🙈 I'm not jealous. I'm NOT. My eye is just twitching from the screen glare.",
+    ],
+    [
+      "🐵 Three guesses. I mean... I SUPPOSE that's... fine. It's fine. I'm fine. 🔥",
+      "🍌 Decent. Not GOOD. Decent. There's a difference and I know it even if you don't.",
+      "😤 I could have done that too if I had thumbs. Well I DO have thumbs but... SHUT UP.",
+    ],
+    [
+      "🙄 Four tries. I mean I had it in two but I didn't want to show you up.",
+      "🐒 OK. OK. That was... *deep breath* ...not terrible. There I said it. Happy?",
+      "🐵 I was ROOTING for you to fail but nooooo you had to go and... solve it. 😤",
+    ],
+    [
+      "😤 Five guesses?! I mean... at least you got there. I GUESS. Reluctantly acknowledging this.",
+      "🐵 That took a while but... and I CANNOT believe I'm saying this... well done. Ugh. 🤢",
+      "🙈 I was SO close to celebrating your failure and you RUINED it.",
+    ],
+    [
+      "💀 SIX?! I was already writing your obituary and you... survived?! RUDE.",
+      "🐵 You got it on the LAST guess?! I had CHAMPAGNE ready for your defeat!! 😤",
+      "🙈 OK I will PRIVATELY admit that was a clutch finish. But publicly? EMBARRASSING.",
+    ],
   ];
-  return msgs[row] || msgs[msgs.length - 1];
+  const rowMsgs = pool[row] || pool[pool.length - 1];
+  return rowMsgs[Math.floor(Math.random() * rowMsgs.length)];
 }
 function getMonkeyLoseMessage() {
   const msgs = [
