@@ -425,8 +425,10 @@ body.rolling #rolling-nav { display: flex !important; }
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
   position: relative;
+  scroll-behavior: smooth;
 }
 #rolling-history {
   display: flex;
@@ -2298,12 +2300,23 @@ function buildRollingBoard() {
   const board = document.getElementById('rolling-board');
   board.innerHTML = '';
 
-  // Row 0 = answer row (the carried-over word from last game)
+  // Row 0 = carry-over row (winning word evaluated against new target, or last answer on loss, or hidden if first game)
   const answerRow = document.createElement('div');
   answerRow.className = 'row answer-row';
   answerRow.id = 'rolling-row-0';
 
-  if (rollingState.history.length > 0) {
+  if (rollingState.carryOver) {
+    // Won last game — show carry-over word with colors evaluated against current target
+    const carryEntry = rollingState.carryOver;
+    for (let c = 0; c < WORD_LENGTH; c++) {
+      const tile = document.createElement('div');
+      tile.className = 'tile filled ' + carryEntry.result[c];
+      tile.textContent = carryEntry.guess[c];
+      tile.id = `rtile-0-${c}`;
+      answerRow.appendChild(tile);
+    }
+  } else if (rollingState.history.length > 0) {
+    // Lost last game — show the answer that was revealed, all green
     const lastGame = rollingState.history[rollingState.history.length - 1];
     for (let c = 0; c < WORD_LENGTH; c++) {
       const tile = document.createElement('div');
@@ -2342,13 +2355,19 @@ function buildRollingBoard() {
 
   // Render history
   renderRollingHistory();
+
+  // Auto-scroll to bottom (current game)
+  requestAnimationFrame(() => {
+    const scrollEl = document.getElementById('rolling-scroll');
+    if (scrollEl) scrollEl.scrollTop = scrollEl.scrollHeight;
+  });
 }
 
 function renderRollingHistory() {
   const container = document.getElementById('rolling-history');
   container.innerHTML = '';
-  // Show last 5 games
-  const recent = (rollingState.history || []).slice(-5);
+  // Show all previous games (scrollable)
+  const recent = (rollingState.history || []);
   recent.forEach((game, idx) => {
     const div = document.createElement('div');
     div.className = 'history-game';
@@ -2380,7 +2399,7 @@ function restoreRollingGame() {
   letterStates = rollingState.letterStates || {};
   targetWord = rollingState.currentAnswer;
 
-  // Restore tiles
+  // Restore tiles (carry-over is rendered by buildRollingBoard, not in boardState)
   boardState.forEach((entry, r) => {
     for (let c = 0; c < WORD_LENGTH; c++) {
       const tile = document.getElementById(`rtile-${r+1}-${c}`);
@@ -2402,18 +2421,18 @@ function rollingNextGame() {
   const lastAnswer = targetWord;
 
   // Add to history
+  const won = boardState.length <= MAX_GUESSES && boardState[boardState.length-1]?.result.every(r => r === 'correct');
   rollingState.history.push({
     gameNum: rollingState.gameNum,
     guesses: [...boardState],
     answer: lastAnswer,
-    won: boardState.length <= MAX_GUESSES && boardState[boardState.length-1]?.result.every(r => r === 'correct')
+    won
   });
 
-  // Keep last 20 games
-  if (rollingState.history.length > 20) rollingState.history = rollingState.history.slice(-20);
+  // Keep last 50 games
+  if (rollingState.history.length > 50) rollingState.history = rollingState.history.slice(-50);
 
   // Update stats
-  const won = rollingState.history[rollingState.history.length - 1].won;
   if (won) {
     rollingState.streak++;
   } else {
@@ -2421,31 +2440,83 @@ function rollingNextGame() {
   }
   rollingState.gameNum++;
 
-  // Next word = new random word (the DISPLAY shows the last answer as first row)
+  // Next word = new random word
   const nextWord = getRandomWord();
   rollingState.currentAnswer = nextWord;
-  rollingState.boardState = [];
-  rollingState.currentRow = 0;
-  rollingState.currentCol = 0;
-  rollingState.currentGuess = '';
-  rollingState.gameOver = false;
-  rollingState.letterStates = {};
-
-  // Reset game state
-  boardState = [];
-  currentRow = 0;
-  currentCol = 0;
-  currentGuess = '';
-  gameOver = false;
-  letterStates = {};
-  clueLevel = 0;
-  targetWord = nextWord;
   VALID_GUESSES.add(nextWord.toLowerCase());
 
-  // Rebuild keyboard — clear all key colors
+  // If won, carry the winning word as the first guess of the new game
+  if (won) {
+    const carryGuess = lastAnswer;
+    const carryResult = evaluateGuess(carryGuess, nextWord);
+    const carryEntry = { guess: carryGuess, result: carryResult };
+
+    // Store carry-over separately (display only — not in boardState)
+    rollingState.carryOver = carryEntry;
+
+    // Update letter states from carry-over guess
+    const newLetterStates = {};
+    for (let i = 0; i < WORD_LENGTH; i++) {
+      const letter = carryGuess[i];
+      const res = carryResult[i];
+      if (res === 'correct') newLetterStates[letter] = 'correct';
+      else if (res === 'present' && newLetterStates[letter] !== 'correct') newLetterStates[letter] = 'present';
+      else if (res === 'absent' && !newLetterStates[letter]) newLetterStates[letter] = 'absent';
+    }
+
+    // Check if carry-over guess is already correct (won instantly!)
+    const carryWon = carryResult.every(r => r === 'correct');
+
+    rollingState.boardState = [];
+    rollingState.currentRow = 0;
+    rollingState.currentCol = 0;
+    rollingState.currentGuess = '';
+    rollingState.gameOver = carryWon;
+    rollingState.letterStates = newLetterStates;
+
+    boardState = [];
+    currentRow = 0;
+    currentCol = 0;
+    currentGuess = '';
+    gameOver = carryWon;
+    letterStates = newLetterStates;
+
+    if (carryWon) {
+      // Carry-over word matches new target — auto-win, chain continues
+      // We need to record this win but defer to avoid recursion
+      rollingState.boardState = [carryEntry];
+      rollingState.currentRow = 1;
+      boardState = [carryEntry];
+      currentRow = 1;
+    }
+  } else {
+    rollingState.carryOver = null;
+    rollingState.boardState = [];
+    rollingState.currentRow = 0;
+    rollingState.currentCol = 0;
+    rollingState.currentGuess = '';
+    rollingState.gameOver = false;
+    rollingState.letterStates = {};
+
+    boardState = [];
+    currentRow = 0;
+    currentCol = 0;
+    currentGuess = '';
+    gameOver = false;
+    letterStates = {};
+  }
+
+  clueLevel = 0;
+  targetWord = nextWord;
+
+  // Rebuild keyboard with carried-over letter states
   buildKeyboard();
   document.querySelectorAll('.key').forEach(k => {
     k.classList.remove('correct', 'present', 'absent');
+  });
+  Object.entries(letterStates).forEach(([letter, state]) => {
+    const key = document.getElementById(`key-${letter}`);
+    if (key) key.classList.add(state);
   });
 
   // Save clean state immediately (before animation) so reloads don't get stale keyboard
