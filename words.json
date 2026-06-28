@@ -1,10 +1,10 @@
 {
-  "2026-06-27": {"solution": "scoop", "day": 1834},
   "2026-06-28": {"solution": "emcee", "day": 1835},
   "2026-06-29": {"solution": "crude", "day": 1836},
   "2026-06-30": {"solution": "puppy", "day": 1837},
   "2026-07-01": {"solution": "demur", "day": 1838},
   "2026-07-02": {"solution": "maven", "day": 1839},
   "2026-07-03": {"solution": "baton", "day": 1840},
-  "2026-07-04": {"solution": "pizza", "day": 1841}
+  "2026-07-04": {"solution": "pizza", "day": 1841},
+  "2026-07-05": {"solution": "swami", "day": 1842}
 }
