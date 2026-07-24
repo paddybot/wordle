@@ -1,10 +1,10 @@
 {
-  "2026-07-23": {"solution": "orbit", "day": 1860},
   "2026-07-24": {"solution": "putty", "day": 1861},
   "2026-07-25": {"solution": "aloha", "day": 1862},
   "2026-07-26": {"solution": "grape", "day": 1863},
   "2026-07-27": {"solution": "poser", "day": 1864},
   "2026-07-28": {"solution": "sonar", "day": 1865},
   "2026-07-29": {"solution": "valve", "day": 1866},
-  "2026-07-30": {"solution": "flume", "day": 1867}
+  "2026-07-30": {"solution": "flume", "day": 1867},
+  "2026-07-31": {"solution": "purse", "day": 1868}
 }
