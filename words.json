@@ -1,10 +1,10 @@
 {
-  "2026-08-10": {"solution": "snipe", "day": 1878},
   "2026-08-11": {"solution": "fence", "day": 1879},
   "2026-08-12": {"solution": "wimpy", "day": 1880},
   "2026-08-13": {"solution": "crash", "day": 1881},
   "2026-08-14": {"solution": "geode", "day": 1882},
   "2026-08-15": {"solution": "loose", "day": 1883},
   "2026-08-16": {"solution": "aspic", "day": 1884},
-  "2026-08-17": {"solution": "tribe", "day": 1885}
+  "2026-08-17": {"solution": "tribe", "day": 1885},
+  "2026-08-18": {"solution": "strip", "day": 1886}
 }
