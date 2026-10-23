@@ -1,10 +1,10 @@
 {
-  "2026-10-22": {"solution": "reset", "day": 1951},
   "2026-10-23": {"solution": "trill", "day": 1952},
   "2026-10-24": {"solution": "holey", "day": 1953},
   "2026-10-25": {"solution": "dress", "day": 1954},
   "2026-10-26": {"solution": "geeky", "day": 1955},
   "2026-10-27": {"solution": "bingo", "day": 1956},
   "2026-10-28": {"solution": "grist", "day": 1957},
-  "2026-10-29": {"solution": "motor", "day": 1958}
+  "2026-10-29": {"solution": "motor", "day": 1958},
+  "2026-10-30": {"solution": "slide", "day": 1959}
 }
